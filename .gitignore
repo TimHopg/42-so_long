@@ -2,8 +2,5 @@
 *.dSYM
 *.o
 *.a
-push_swap
-checker_Mac
-push_swap_tester/
-checker
-checker_linux
+so_long
+.vscode

@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/17 21:47:52 by thopgood         ###   ########.fr        #
+#    Updated: 2024/06/18 16:30:52 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ RM 			= rm -rf
 INCLUDE 	= -Iinclude
 
 ifeq ($(shell uname), Linux)
-	MLX_INCLUDE = -I/usr/include -Imlx
-	MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+	MLX_INCLUDE = -I/usr/include -Imlx -O3
+	MLX_FLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
+# -L/usr/lib/X11
 else # OSX
 	MLX_INCLUDE = -I/opt/X11/include -Imlx
 	MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
@@ -40,15 +41,16 @@ SRC 		= 	so_long.c
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: $(MLX_LIB) $(NAME)
-
+	
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_INCLUDE)
+	@$(CC) $(CFLAGS) $(MLX_INCLUDE) -c $< -o $@ 
 
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)
 	@echo ""${BLUE}$(NAME)""${NC}Compiling... "\c"
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo ""${GREEN}Complete""$(NC)""
 
 $(MLX_LIB):

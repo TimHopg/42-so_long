@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/18 16:57:55 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:23:14 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,13 +153,27 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
+
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	// draw_line(&img, 100, 100, 500, 500, 0x00FF00);
-	// draw_rectangle(&img, 1200, 300, 400, 600, 0x00882000);
-	draw_circle(&img, 400, 400, 50, 0xFF000000);
-	// Draw red circle
+	draw_line(&img, 100, 100, 500, 500, 0x00FF00);
+	draw_rectangle(&img, 1200, 300, 400, 600, 0x00882000);
+	draw_circle(&img, 400, 400, 50, 0x00FF0082);
 	draw_gradient(&img, 800, 100, 200, 200, 0xFF0000, 0x000000FF);
-	// Draw gradient from red to blue
+
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+
 	mlx_loop(mlx);
+
+	free(mlx);
 }
+
+
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*mlx_win;
+
+// 	mlx = mlx_init();
+// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+// 	mlx_loop(mlx);
+// }

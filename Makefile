@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/18 16:30:52 by thopgood         ###   ########.fr        #
+#    Updated: 2024/06/18 21:31:20 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ ifeq ($(shell uname), Linux)
 	MLX_INCLUDE = -I/usr/include -Imlx -O3
 	MLX_FLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 # -L/usr/lib/X11
-else # OSX
-	MLX_INCLUDE = -I/opt/X11/include -Imlx
-	MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
+else
+	MLX_INCLUDE = -Imlx
+# -I/opt/X11/include
+	MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
 # CFLAGS = -Wall -Wextra -Werror $(INCLUDE) # MAIN

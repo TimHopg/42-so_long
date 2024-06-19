@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/19 09:23:14 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:48:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }			t_data;
+
+typedef struct s_vars
+{
+	void *mlx;
+	void *win;
+}			t_vars;
+
+int close_window (int keycode, t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	return (0);
+}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 {
@@ -147,26 +159,23 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+	t_vars vars;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	draw_line(&img, 100, 100, 500, 500, 0x00FF00);
 	draw_rectangle(&img, 1200, 300, 400, 600, 0x00882000);
 	draw_circle(&img, 400, 400, 50, 0x00FF0082);
 	draw_gradient(&img, 800, 100, 200, 200, 0xFF0000, 0x000000FF);
-
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-
+	mlx_hook(vars.win, 2, 1L<<0, close_window, &vars);
 	mlx_loop(mlx);
-
 	free(mlx);
 }
-
 
 // int	main(void)
 // {

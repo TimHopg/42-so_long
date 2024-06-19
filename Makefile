@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/19 11:56:17 by thopgood         ###   ########.fr        #
+#    Updated: 2024/06/19 15:18:45 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,7 @@ else
 	MLX_TAR 	= minilibx_opengl
 endif
 
-# CFLAGS = -Wall -Wextra -Werror $(INCLUDE) # MAIN
-# CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # valgrind
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g # leaks
-# CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -fsanitize=address # fsanitize
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # -fsanitize=address
 
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/

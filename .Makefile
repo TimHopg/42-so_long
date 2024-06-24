@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/23 17:42:12 by thopgood         ###   ########.fr        #
+#    Updated: 2024/06/23 16:20:09 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,21 @@ CC 			= cc
 RM 			= rm -rf
 INCLUDE 	= -Iinclude
 
-MLX_INCLUDE = -I/usr/include -Imlx -O3
-MLX_FLAGS 	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
-GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/21389/minilibx-linux.tgz
-MLX_TAR 	= minilibx-linux
+ifeq ($(shell uname), Linux)
+	MLX_INCLUDE = -I/usr/include -Imlx -O3
+	MLX_FLAGS 	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
+	GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/21389/minilibx-linux.tgz
+	MLX_TAR 	= minilibx-linux
+	MLX_TAR_D	= $(MLX_TAR)
+# -L/usr/lib/X11
+else
+	MLX_INCLUDE = -Imlx -I/opt/X11/include
+	MLX_FLAGS 	= -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
+	GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/21390/minilibx_opengl.tgz
+	MLX_TAR 	= minilibx_opengl
+	MLX_TAR_D	= minilibx_opengl_20191021
+
+endif
 
 CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # -fsanitize=address
 
@@ -48,7 +59,7 @@ download:
 	@echo ""${BLUE}$(MLX_TAR)""${NC}Unpacking..."\c"
 	@$(UNTAR) $(MLX_TAR).tgz > /dev/null
 	@echo ""${GREEN}Unpacked""$(NC)""
-	@mv $(MLX_TAR) $(MLX_DIR)
+	@mv $(MLX_TAR_D) $(MLX_DIR)
 	@rm -f $(MLX_TAR).tgz
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

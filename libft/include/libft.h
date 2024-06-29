@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:24:25 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/16 12:47:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/28 22:46:21 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int					ft_isspace(char c);
 void				ft_putbase_fd(int n, const char *base, int fd);
 long				ft_abs(long n);
 char				*get_next_line(int fd);
-// size_t			ft_isinset(char const *set, const char c);
-// size_t			ft_countwords(char const *str, char const *set);
+char				*ft_strpbrk(const char *s1, const char *s2);
+int					count_words(char *str, char *set);
 // size_t			ft_numlen(long n);
 
 // ft_printf

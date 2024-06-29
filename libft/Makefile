@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 19:27:57 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/16 12:48:39 by thopgood         ###   ########.fr        #
+#    Updated: 2024/06/28 22:46:02 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,9 @@ SRC			= 	ft_isalpha.c \
 				ft_printf.c \
 				ft_printf_utils.c \
 				ft_printf_utils2.c \
-				get_next_line.c 
+				get_next_line.c \
+				ft_strpbrk.c \
+				count_words.c
 
 OBJ			= $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 

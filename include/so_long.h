@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/28 16:29:39 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:10:33 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+# define TILE_SIZE 32
+# define VALID_CHARS "01CEP"
+
+// Errors
 # define MALLOC_FAIL 1
 # define OPEN_FAIL 2
-
-# define TILE_SIZE 32
-
 
 
 typedef struct s_exit
@@ -40,7 +41,9 @@ typedef struct s_map
 {
 	char	**map;
 	t_exit	*exit;
-	int		coins;
+	int		exit_count;
+	int		coin_count;
+	int		p_count;
 	int		w;
 	int		h;
 }			t_map;
@@ -55,10 +58,9 @@ typedef struct s_vars
 	t_map	*map;
 }			t_vars;
 
-
+void error_handling(int error_code);
 void parse_map(const char *filename, t_vars *vars);
 int	main(void);
-
 
 // Events
 // enum

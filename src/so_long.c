@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/28 16:29:39 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:02:35 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,15 @@ int	main(void)
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
 		return (MALLOC_FAIL);
+	
+	// char *str = "!!!_____the _!__!_!     !_!_ only !_!_!_";
+	char *str = " 1 2 3 ";
+	// char *set = "!_";
+	char *set = " ";
+	// printf("%s \n", ft_strpbrk(str, set));
+	// str++;
+	// ft_printf("%c", *str);
+	ft_printf("%d word count\n", count_words(str, set));
 
 
 	parse_map("maps/basicmap.ber", &vars);

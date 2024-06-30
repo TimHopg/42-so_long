@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/29 17:02:35 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:28:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	close_window(t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx)
 		free(vars->mlx);
+
 	exit(0);
-	return (0);
+	// return (0);
 }
 
 void render_background(t_vars *vars, void *sprites[])
@@ -103,37 +104,20 @@ int	main(void)
 	char	*relative_path = "./sprites/field.xpm";
 	int		img_size;
 
-
-	// t_data	img;
 	img_size = TILE_SIZE;
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
-		return (MALLOC_FAIL);
-	
-	// char *str = "!!!_____the _!__!_!     !_!_ only !_!_!_";
-	char *str = " 1 2 3 ";
-	// char *set = "!_";
-	char *set = " ";
-	// printf("%s \n", ft_strpbrk(str, set));
-	// str++;
-	// ft_printf("%c", *str);
-	ft_printf("%d word count\n", count_words(str, set));
-
-
+        error_handling(ERR_MALLOC, &vars);
 	parse_map("maps/basicmap.ber", &vars);
-	
-	
-	
 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Thanks For All The Fish!");
 	if (vars.win == NULL)
-		return (free(vars.mlx), MALLOC_FAIL);
+        error_handling(ERR_MALLOC, &vars);
 	// img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// &img.line_length, &img.endian);
 
 	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
 	render_background(&vars, vars.sprites);
-
 
 	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
 	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, close_window, &vars);

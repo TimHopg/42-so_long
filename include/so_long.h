@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/29 21:10:33 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/06/30 10:30:24 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@
 # define VALID_CHARS "01CEP"
 
 // Errors
-# define MALLOC_FAIL 1
-# define OPEN_FAIL 2
-
+# define ERR_MALLOC "Malloc error\n"
+# define ERR_OPEN "Error opening map file\n"
+# define ERR_RECTANGLE "Map not rectangular\n"
+# define ERR_CHARS "Bad chars in map file\n"
+# define ERR_PLAYER "Incorrect player position number\n"
+# define ERR_EXIT "Incorrect exit number\n"
+# define ERR_COLL "Wrong number of collectibles\n"
+# define ERR_MAP_H "Map height of zero\n"
 
 typedef struct s_exit
 {
@@ -58,7 +63,7 @@ typedef struct s_vars
 	t_map	*map;
 }			t_vars;
 
-void error_handling(int error_code);
+void error_handling(char *error_code, t_vars *vars);
 void parse_map(const char *filename, t_vars *vars);
 int	main(void);
 
@@ -73,5 +78,30 @@ int	main(void);
 // 	ON_EXPOSE = 12,
 // 	ON_DESTROY = 17
 // };
+
+/*
+0 = empty space
+1 = wall
+C = collectible
+E = map exit
+P = player starting position
+
+11111111111111111111
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+10000000000000000001
+11111111111111111111
+
+*/
 
 #endif

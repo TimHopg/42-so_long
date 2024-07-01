@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/29 22:28:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:11:18 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,46 @@ int	key_press(int keysym, t_vars *vars)
  ! MEMORY map, textures, window, (display), mlx
  */
 
-int	main(void)
+int	main(int ac, char **av)
 {
+
+	/* char	*relative_path = "./sprites/field.xpm"; */
+
+	int fd;
 	t_vars	vars;
-	char	*relative_path = "./sprites/field.xpm";
+
+	(void)ac;
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		error_handling_vars(ERR_OPEN, &vars);
+	parse_map(fd, &vars);
+
+
+/*	
 	int		img_size;
 
 	img_size = TILE_SIZE;
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
-        error_handling(ERR_MALLOC, &vars);
-	parse_map("maps/basicmap.ber", &vars);
-	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Thanks For All The Fish!");
+        error_handling(ERR_MALLOC, &vars); */
+
+
+/* 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Thanks For All The Fish!");
 	if (vars.win == NULL)
-        error_handling(ERR_MALLOC, &vars);
+        error_handling(ERR_MALLOC, &vars); */
+
+
+
 	// img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// &img.line_length, &img.endian);
 
-	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
+/* 	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
 	render_background(&vars, vars.sprites);
 
 	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
 	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, close_window, &vars);
-	mlx_loop(vars.mlx);
+	mlx_loop(vars.mlx); */
 }
 
 /*

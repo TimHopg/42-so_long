@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/30 10:30:24 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:26:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@
 # define ERR_OPEN "Error opening map file\n"
 # define ERR_RECTANGLE "Map not rectangular\n"
 # define ERR_CHARS "Bad chars in map file\n"
-# define ERR_PLAYER "Incorrect player position number\n"
-# define ERR_EXIT "Incorrect exit number\n"
+# define ERR_PLAYER "Wrong number of player starting positions\n"
+# define ERR_EXIT "Wrong number of exits\n"
 # define ERR_COLL "Wrong number of collectibles\n"
 # define ERR_MAP_H "Map height of zero\n"
-
-typedef struct s_exit
-{
-	int	x;
-	int y;
-} t_exit;
+# define ERR_GNL "Get next line error\n"
 
 typedef struct s_map
 {
 	char	**map;
-	t_exit	*exit;
+	int		exit_w;
+	int		exit_h;
 	int		exit_count;
 	int		coin_count;
 	int		p_count;
+	int		p_w;
+	int		p_h;
 	int		w;
 	int		h;
 }			t_map;
@@ -63,9 +61,11 @@ typedef struct s_vars
 	t_map	*map;
 }			t_vars;
 
-void error_handling(char *error_code, t_vars *vars);
-void parse_map(const char *filename, t_vars *vars);
-int	main(void);
+void error_handling_vars(char *error_code, t_vars *vars);
+void free_map(t_vars *vars);
+void error_handling_import(char *error_code, char *str1, char *str2);
+void parse_map(int fd, t_vars *vars);
+int	main(int ac, char **av);
 
 // Events
 // enum

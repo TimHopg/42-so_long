@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 13:47:14 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:02:48 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
 #define ERR_CHARS "Bad chars in map file\n"
 #define ERR_PLAYER "Wrong number of player starting positions\n"
 #define ERR_EXIT "Wrong number of exits\n"
-#define ERR_COLL "Wrong number of collectibles\n"
-#define ERR_MAP_H "Map height of zero\n"
-#define ERR_MAP_PER "Map not enclosed with walls\n"
+#define ERR_COLL "No collectibles\n"
+#define ERR_MAP_H "No map content\n"
+#define ERR_MAP_PER "Map not enclosed by walls\n"
 #define ERR_GNL "Get next line error\n"
 
 typedef struct s_map

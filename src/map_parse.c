@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 13:46:40 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:05:24 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void parse_map(int fd, t_vars *vars)
     if (vars->map->map == NULL)
         error_handling_import(ERR_MALLOC, map_str, NULL);
     free(map_str);
+    if (!vars->map->map[0])
+        error_handling_vars(ERR_MAP_H, vars);
     map_dimensions(vars);
     is_map_valid(vars);
     ft_printf("p(x,y) (%d,%d)\n", vars->map->p_x, vars->map->p_y);
@@ -107,12 +109,14 @@ void parse_map(int fd, t_vars *vars)
  * non rectangular (lines different length)
  * bad chars
  ! flood fill fail
- ! less or more than 1 exit
- ! less or more than 1 starting position
- ! less than one collectible
- ! file permissions
- ! wall not around perimeter
+ * less or more than 1 exit
+ * less or more than 1 starting position
+ * less than one collectible
+ * file permissions
+ * wall not around perimeter
  ! map with too few columns or rows (min 3 each?)
+ * empty map
+ * map of new lines
  */
 
 // /*

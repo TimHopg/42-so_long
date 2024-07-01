@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 12:21:35 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:59:28 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,19 @@ int	main(int ac, char **av)
 	(void)ac;
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		error_handling_vars(ERR_OPEN, &vars);
+		error_handling_import(ERR_OPEN, NULL, NULL);
 	parse_map(fd, &vars);
 
+/* 	(void)av;
+	(void)vars;
+	(void)fd;
+
+	char *str = "\n";
+	char **out;
+	out = ft_split(str, '\n');
+	ft_printf("%s out\n", out[0]);
+	ft_printf("%s out\n", out[1]);
+	free(out); */
 
 /*	
 	int		img_size;

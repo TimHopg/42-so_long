@@ -6,21 +6,21 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 14:01:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:20:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
- * Checks 'rectangularity' of map
- */
+// /*
+//  * Checks 'rectangularity' of map
+//  */
 
-void is_map_rectangle(int map_width, int line_width, t_vars *vars)
-{
-    if (map_width != line_width)
-        error_handling_vars(ERR_RECTANGLE, vars);
-}
+// void is_map_rectangle(int map_width, int line_width, t_vars *vars)
+// {
+//     if (map_width != line_width)
+//         error_handling_vars(ERR_RECTANGLE, vars);
+// }
 
 /*
  * Parses line checking for bad chars and updating e, p, c count/coords
@@ -99,7 +99,9 @@ int is_map_valid(t_vars *vars)
     i = -1;
     while (++i < vars->map->h)
     {
-        is_map_rectangle(vars->map->w, ft_strlen(vars->map->map[i]), vars);
+        // is_map_rectangle(vars->map->w, ft_strlen(vars->map->map[i]), vars);
+        if (vars->map->w != (int)ft_strlen(vars->map->map[i]))
+            error_handling_vars(ERR_RECTANGLE, vars);
         parse_line_chars(vars->map->map[i], vars, i);
     }
     if (vars->map->p_count != 1)

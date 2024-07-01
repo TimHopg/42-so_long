@@ -1,64 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 11:30:49 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:46:40 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void initialise_map(t_vars *vars);
-
-void is_map_rectangle(int map_width, int line_width, t_vars *vars)
-{
-    if (map_width != line_width)
-        error_handling_vars(ERR_RECTANGLE, vars);
-}
-
-void parse_line_chars(char *line, t_vars *vars, int h)
-{
-    int i;
-
-    i = 0;
-    while(line[i])
-    {
-        if (!ft_strchr(VALID_CHARS, line[i]))
-            error_handling_vars(ERR_CHARS, vars);
-        if (line[i] == 'C')
-            vars->map->coin_count++;
-        if (line[i] == 'P')
-        {            
-            vars->map->p_w = i;
-            vars->map->p_h = h;
-            vars->map->p_count++;
-        }
-        if (line[i] == 'E')
-        {
-            vars->map->exit_w = i;
-            vars->map->exit_h = h;
-            vars->map->exit_count++;
-        }
-        ++i;
-    }
-}
-
-int has_invalid_char(char *str, char *valids)
-{
-    while(*str)
-    {
-        if (!ft_strchr(valids, *str))
-        {
-            return (1);
-        }
-        str++;
-    }
-    return (0);
-}
+void initialise_map(t_vars *vars, char *map_str);
 
 void map_dimensions(t_vars *vars)
 {
@@ -71,40 +25,20 @@ void map_dimensions(t_vars *vars)
     vars->map->w = ft_strlen(vars->map->map[0]);
 }
 
-int is_map_valid(t_vars *vars)
-{
-    int i;
-
-    i = 0;
-    while (i < vars->map->h)
-    {
-        is_map_rectangle(vars->map->w, ft_strlen(vars->map->map[i]), vars);
-        parse_line_chars(vars->map->map[i], vars, i);
-        i++;
-    }
-    if (vars->map->p_count != 1)
-        error_handling_vars(ERR_PLAYER, vars);
-    if (vars->map->exit_count != 1)
-        error_handling_vars(ERR_EXIT, vars);
-    if (vars->map->coin_count < 1)
-        error_handling_vars(ERR_COLL, vars);
-    return (1);
-}
-
 char *mapfile_to_str(int fd)
 {
-    char    *temp;
-    char    *line;
-    int     gnl_status;
+    char *temp;
+    char *line;
+    int gnl_status;
     char *map_str;
-    
+
     map_str = ft_strdup("");
     if (map_str == NULL)
         error_handling_import(ERR_MALLOC, NULL, NULL);
     gnl_status = get_next_line(fd, &line);
     while (gnl_status > 0)
     {
-        temp = map_str;   
+        temp = map_str;
         map_str = ft_strjoin(map_str, line);
         if (map_str == NULL)
             error_handling_import(ERR_MALLOC, temp, line);
@@ -114,27 +48,29 @@ char *mapfile_to_str(int fd)
     }
     if (gnl_status == GNL_ERROR)
         error_handling_import(ERR_GNL, map_str, NULL);
-    return(map_str);
+    return (map_str);
 }
 
 /*
  * Function initialises fields of t_map structure
  */
 
-void initialise_map(t_vars *vars)
+void initialise_map(t_vars *vars, char *map_str)
 {
-    // vars->map = ft_calloc(1, sizeof(t_map));
-    vars->map = malloc(sizeof(t_map));
-    // vars->map->map = malloc(sizeof(char *));
+    vars->map = ft_calloc(1, sizeof(t_map));
+    // vars->map = malloc(sizeof(t_map));
     if (vars->map == NULL)
-        error_handling_vars(ERR_MALLOC, vars);
-    vars->map->p_count = 0; // can use map{val, val} to initialize values
-    vars->map->exit_count = 0; // can use map{val, val} to initialize values
-    vars->map->coin_count = 0; // can use map{val, val} to initialize values
-    vars->map->h = 0; // can use map{val, val} to initialize values
-    vars->map->w = 0; // can use map{val, val} to initialize values
+        error_handling_import(ERR_MALLOC, map_str, NULL); // !
+    // vars->map->w = 0; // can use map{val, val} to initialize values
+    // vars->map->h = 0; // can use map{val, val} to initialize values
+    // vars->map->coin_count = 0; // can use map{val, val} to initialize values
+    // vars->map->p_count = 0; // can use map{val, val} to initialize values
+    // vars->map->p_w = 0; // can use map{val, val} to initialize values
+    // vars->map->p_h = 0; // can use map{val, val} to initialize values
+    // vars->map->exit_count = 0; // can use map{val, val} to initialize values
+    // vars->map->exit_w = 0; // can use map{val, val} to initialize values
+    // vars->map->exit_h = 0; // can use map{val, val} to initialize values
 }
-
 
 void print_map(t_vars *vars)
 {
@@ -148,39 +84,19 @@ void print_map(t_vars *vars)
 void parse_map(int fd, t_vars *vars)
 {
     char *map_str;
-    
+
     map_str = mapfile_to_str(fd);
-    initialise_map(vars);
+    initialise_map(vars, map_str);
     vars->map->map = ft_split(map_str, '\n');
     if (vars->map->map == NULL)
         error_handling_import(ERR_MALLOC, map_str, NULL);
     free(map_str);
     map_dimensions(vars);
     is_map_valid(vars);
-    print_map(vars);
+    ft_printf("p(x,y) (%d,%d)\n", vars->map->p_x, vars->map->p_y);
+    ft_printf("exit(x,y) (%d,%d)\n", vars->map->exit_x, vars->map->exit_y);
+    // print_map(vars);
     free_map(vars);
-
-
-
-
-    // vars->map->h = import_map(filename, vars);
-    // if (vars->map->h == 0)
-    //     error_handling(ERR_MAP_H, vars);
-    // vars->map->w = ft_strlen(vars->map->map[0]);
-
-
-    
-
-    // ft_printf("%d map width\n", vars->map->w);
-    // is_map_valid(vars);
-    
-    // int width;
-    
-    // ft_printf("%s\n", vars->map->map[1]);
-    // width = ft_strlen(line);
-    // vars->map->w = width - 1;
-    // vars->win_w = TILE_SIZE * width - 1;
-    // ft_printf("%d\n", width - 1);
 }
 
 /*

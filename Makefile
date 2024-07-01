@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/06/29 21:02:31 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/01 13:24:01 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ LIBFT		= -L $(LIBFT_DIR) -lft
 UNTAR		= tar -xvf
 
 SRC 		= 	so_long.c \
-				map.c \
+				map_parse.c \
+				map_validity.c \
 				error.c
 
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

@@ -6,66 +6,69 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 11:26:44 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:47:14 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-# define SO_LONG_H
+#define SO_LONG_H
 
-# include "../libft/include/libft.h"
-# include "X11/X.h"
-# include "X11/keysym.h"
-# include "mlx.h"
-# include <limits.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
+#include "../libft/include/libft.h"
+#include "X11/X.h"
+#include "X11/keysym.h"
+#include "mlx.h"
+#include <limits.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
-# define TILE_SIZE 32
-# define VALID_CHARS "01CEP"
+#define TILE_SIZE 32
+#define VALID_CHARS "01CEP"
 
 // Errors
-# define ERR_MALLOC "Malloc error\n"
-# define ERR_OPEN "Error opening map file\n"
-# define ERR_RECTANGLE "Map not rectangular\n"
-# define ERR_CHARS "Bad chars in map file\n"
-# define ERR_PLAYER "Wrong number of player starting positions\n"
-# define ERR_EXIT "Wrong number of exits\n"
-# define ERR_COLL "Wrong number of collectibles\n"
-# define ERR_MAP_H "Map height of zero\n"
-# define ERR_GNL "Get next line error\n"
+#define ERR_MALLOC "Malloc error\n"
+#define ERR_OPEN "Error opening map file\n"
+#define ERR_RECTANGLE "Map not rectangular\n"
+#define ERR_CHARS "Bad chars in map file\n"
+#define ERR_PLAYER "Wrong number of player starting positions\n"
+#define ERR_EXIT "Wrong number of exits\n"
+#define ERR_COLL "Wrong number of collectibles\n"
+#define ERR_MAP_H "Map height of zero\n"
+#define ERR_MAP_PER "Map not enclosed with walls\n"
+#define ERR_GNL "Get next line error\n"
 
 typedef struct s_map
 {
-	char	**map;
-	int		exit_w;
-	int		exit_h;
-	int		exit_count;
-	int		coin_count;
-	int		p_count;
-	int		p_w;
-	int		p_h;
-	int		w;
-	int		h;
-}			t_map;
+	char **map;
+	int exit_x;
+	int exit_y;
+	int exit_count;
+	int coin_count;
+	int p_count;
+	int p_x;
+	int p_y;
+	int w;
+	int h;
+} t_map;
 
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	int		win_w;
-	int		win_h;
-	void	*sprites[5];
-	t_map	*map;
-}			t_vars;
+	void *mlx;
+	void *win;
+	int win_w;
+	int win_h;
+	void *sprites[5];
+	t_map *map;
+} t_vars;
 
-void error_handling_vars(char *error_code, t_vars *vars);
 void free_map(t_vars *vars);
+void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
+int is_map_valid(t_vars *vars);
 void parse_map(int fd, t_vars *vars);
-int	main(int ac, char **av);
+void print_map(t_vars *vars);
+int main(int ac, char **av);
 
 // Events
 // enum

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 15:02:48 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:41:51 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 #define ERR_MAP_H "No map content\n"
 #define ERR_MAP_PER "Map not enclosed by walls\n"
 #define ERR_GNL "Get next line error\n"
+#define ERR_COIN "Some coins unreachable\n"
+#define ERR_EXITU "Exit unreachable\n"
 
 typedef struct s_map
 {
@@ -66,6 +68,7 @@ void free_map(t_vars *vars);
 void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
 int is_map_valid(t_vars *vars);
+void flood_fill(t_vars *vars);
 void parse_map(int fd, t_vars *vars);
 void print_map(t_vars *vars);
 int main(int ac, char **av);

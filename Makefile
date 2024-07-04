@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/01 13:24:01 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/04 12:27:02 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ UNTAR		= tar -xvf
 SRC 		= 	so_long.c \
 				map_parse.c \
 				map_validity.c \
+				flood_fill.c \
 				error.c
 
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

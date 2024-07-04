@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 15:20:44 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:41:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int is_map_valid(t_vars *vars)
     ft_printf("%c char\n", vars->map->map[vars->map->h - 1][1]);
     print_map(vars);
     check_map_perimeter(vars);
+    flood_fill(vars);
     return (1);
 }
 

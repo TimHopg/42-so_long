@@ -6,21 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/04 15:41:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:46:26 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// /*
-//  * Checks 'rectangularity' of map
-//  */
-
-// void is_map_rectangle(int map_width, int line_width, t_vars *vars)
-// {
-//     if (map_width != line_width)
-//         error_handling_vars(ERR_RECTANGLE, vars);
-// }
 
 /*
  * Parses line checking for bad chars and updating e, p, c count/coords
@@ -70,6 +60,10 @@ int has_invalid_char(char *str, char *valids)
     return (0);
 }
 
+/*
+ * Checks wall perimeter of map
+ */
+
 void check_map_perimeter(t_vars *vars)
 {
     int i;
@@ -99,7 +93,6 @@ int is_map_valid(t_vars *vars)
     i = -1;
     while (++i < vars->map->h)
     {
-        // is_map_rectangle(vars->map->w, ft_strlen(vars->map->map[i]), vars);
         if (vars->map->w != (int)ft_strlen(vars->map->map[i]))
             error_handling_vars(ERR_RECTANGLE, vars);
         parse_line_chars(vars->map->map[i], vars, i);
@@ -110,12 +103,8 @@ int is_map_valid(t_vars *vars)
         error_handling_vars(ERR_EXIT, vars);
     if (vars->map->coin_count < 1)
         error_handling_vars(ERR_COLL, vars);
-    ft_printf("%d width\n", vars->map->w);
-    ft_printf("%d height\n", vars->map->h);
-    ft_printf("%c char\n", vars->map->map[vars->map->h - 1][1]);
     print_map(vars);
     check_map_perimeter(vars);
     flood_fill(vars);
     return (1);
 }
-

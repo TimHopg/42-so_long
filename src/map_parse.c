@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 15:05:24 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:47:11 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ void parse_map(int fd, t_vars *vars)
         error_handling_vars(ERR_MAP_H, vars);
     map_dimensions(vars);
     is_map_valid(vars);
-    ft_printf("p(x,y) (%d,%d)\n", vars->map->p_x, vars->map->p_y);
-    ft_printf("exit(x,y) (%d,%d)\n", vars->map->exit_x, vars->map->exit_y);
-    // print_map(vars);
+    print_map(vars);
     free_map(vars);
 }
 
@@ -108,43 +106,12 @@ void parse_map(int fd, t_vars *vars)
  TODO Map errors:
  * non rectangular (lines different length)
  * bad chars
- ! flood fill fail
+ * flood fill fail
  * less or more than 1 exit
  * less or more than 1 starting position
  * less than one collectible
  * file permissions
  * wall not around perimeter
- ! map with too few columns or rows (min 3 each?)
  * empty map
  * map of new lines
  */
-
-// /*
-//  * Imports map line by line from ber file into t_vars struct
-//  * Returns height of map
-//  */
-
-// int import_map(const char *filename, t_vars *vars)
-// {
-//     int fd;
-//     int i;
-//     char *line;
-
-//     fd = open(filename, O_RDONLY);
-//     if (fd == -1)
-//         error_handling_vars(ERR_OPEN, vars);
-//     get_next_line(fd, &line);
-//     i = 0;
-//     while (line)
-//     {
-//         ft_printf("%s line\n", line);
-//         vars->map->map[i] = ft_strtrim(line, "\n");
-//         if (vars->map->map[i] == NULL)
-//             error_handling_vars(ERR_MALLOC, vars);
-//         get_next_line(fd, &line);
-//         i++;
-//     }
-//     for (int j = 0; j < i; j++)
-//         ft_printf("%s\n", vars->map->map[j]);
-//     return (i);
-// }

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 15:52:42 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:29:45 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 // Errors
 #define ERR_MALLOC "Malloc error\n"
+#define ERR_NOMAP "No map file given\n"
+#define ERR_ARGS "Too many arguments given\n"
 #define ERR_OPEN "Error opening map file\n"
 #define ERR_RECTANGLE "Map not rectangular\n"
 #define ERR_CHARS "Bad chars in map file\n"

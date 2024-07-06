@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 14:42:13 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:58:49 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,11 @@ void print_map(t_vars *vars)
 {
     int i;
 
+    ft_printf("\n");
     i = 0;
     while (i < vars->map->h)
         ft_printf("%s\n", (vars->map->map[i++]));
+    ft_printf("\n");
 }
 
 void parse_map(int fd, t_vars *vars)
@@ -106,7 +108,8 @@ void parse_map(int fd, t_vars *vars)
     map_dimensions(vars);
     print_map(vars);
     is_map_valid(vars);
-    free_map(vars);
+    print_map(vars);
+    free_map(vars); // ! only for testing
 }
 
 /*

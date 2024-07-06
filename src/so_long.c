@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 14:59:28 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:31:27 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,22 @@ int	key_press(int keysym, t_vars *vars)
 // {
 // }
 
+int parse_fd(int ac, char **av)
+{
+	int fd;
+
+	if (ac == 1)
+		error_handling_import(ERR_NOMAP, NULL, NULL);
+	else if (ac > 2)
+		error_handling_import(ERR_ARGS, NULL, NULL);
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		error_handling_import(ERR_OPEN, NULL, NULL);
+	return (fd);
+}
+
 /*
- TODO destroy display on linux machines? necessary
+ TODO destroy display on linux machines? necessary?
  TODO use shell command to edit mlx library file that throws warning during compile
  TODO use keysym instead of keycode (X11/keysym.h)
  TODO silence write value warning on compile of mlx (cc/clang)
@@ -106,10 +120,7 @@ int	main(int ac, char **av)
 	int fd;
 	t_vars	vars;
 
-	(void)ac;
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-		error_handling_import(ERR_OPEN, NULL, NULL);
+	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 
 /* 	(void)av;

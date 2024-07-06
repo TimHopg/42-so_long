@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 16:31:27 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:09:13 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,15 @@ int	key_press(int keysym, t_vars *vars)
 int parse_fd(int ac, char **av)
 {
 	int fd;
+	int ber_len;
 
+	ber_len = ft_strlen(".ber");
 	if (ac == 1)
 		error_handling_import(ERR_NOMAP, NULL, NULL);
 	else if (ac > 2)
 		error_handling_import(ERR_ARGS, NULL, NULL);
+	else if (ft_strncmp(av[1] + ft_strlen(av[1]) - ber_len, ".ber", ber_len) != 0)
+		error_handling_import(ERR_FILETYPE, NULL, NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		error_handling_import(ERR_OPEN, NULL, NULL);
@@ -122,6 +126,7 @@ int	main(int ac, char **av)
 
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
+	free_map(&vars); // ! only for testing
 
 /* 	(void)av;
 	(void)vars;

@@ -6,11 +6,24 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:11:46 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 15:52:46 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:21:36 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+ ! TEMP Prints vector (map clone)
+ */
+
+void print_map_clone (char **map, int height)
+{
+    ft_printf("\n");
+    int i = 0;
+    while (i < height)
+        ft_printf("%s\n", (map[i++]));
+    ft_printf("\n");
+}
 
 /*
  * Checks if current position is outside of map boundaries, is a wall or is a
@@ -34,16 +47,6 @@ void fill(char **map, int p_y, int p_x, t_vars *vars)
     fill(map, p_y + 1, p_x, vars);
     fill(map, p_y, p_x + 1, vars);
 }
-
-void print_map_clone (char **map, int height)
-{
-    ft_printf("\n");
-    int i = 0;
-    while (i < height)
-        ft_printf("%s\n", (map[i++]));
-    ft_printf("\n");
-}
-
 
 /*
  * Sends map to recursive fill function to calculate reachable tiles.

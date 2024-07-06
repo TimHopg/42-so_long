@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/05 21:12:42 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:22:29 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int is_map_valid(t_vars *vars)
         error_handling_vars(ERR_PLAYER, vars);
     if (vars->map->exit_count != 1)
         error_handling_vars(ERR_EXIT, vars);
-    // ft_printf("%d ccount\n", vars->map->coin_count);
     if (vars->map->coin_count < 1)
         error_handling_vars(ERR_COLL, vars);
     // print_map(vars);

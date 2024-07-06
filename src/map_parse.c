@@ -6,13 +6,17 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/04 16:47:11 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:42:13 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void initialise_map(t_vars *vars, char *map_str);
+
+/*
+ * Saves map dimensions into structure 
+ */
 
 void map_dimensions(t_vars *vars)
 {
@@ -25,13 +29,18 @@ void map_dimensions(t_vars *vars)
     vars->map->w = ft_strlen(vars->map->map[0]);
 }
 
-char *mapfile_to_str(int fd)
+/*
+ * Converts .ber map file into single malloc'd string
+ */
+
+char *mapfile_to_str(int fd, t_vars *vars)
 {
     char *temp;
     char *line;
     int gnl_status;
     char *map_str;
 
+    (void)vars;
     map_str = ft_strdup("");
     if (map_str == NULL)
         error_handling_import(ERR_MALLOC, NULL, NULL);
@@ -60,7 +69,9 @@ void initialise_map(t_vars *vars, char *map_str)
     vars->map = ft_calloc(1, sizeof(t_map));
     // vars->map = malloc(sizeof(t_map));
     if (vars->map == NULL)
-        error_handling_import(ERR_MALLOC, map_str, NULL); // !
+        error_handling_vars(ERR_MALLOC, vars); // !
+    vars->map->map_str = map_str;
+    // vars->map->map_str = ft_calloc(1, sizeof(vars->map->map_str));
     // vars->map->w = 0; // can use map{val, val} to initialize values
     // vars->map->h = 0; // can use map{val, val} to initialize values
     // vars->map->coin_count = 0; // can use map{val, val} to initialize values
@@ -85,17 +96,16 @@ void parse_map(int fd, t_vars *vars)
 {
     char *map_str;
 
-    map_str = mapfile_to_str(fd);
+    map_str = mapfile_to_str(fd, vars);
     initialise_map(vars, map_str);
-    vars->map->map = ft_split(map_str, '\n');
+    vars->map->map = ft_split(vars->map->map_str, '\n');
     if (vars->map->map == NULL)
-        error_handling_import(ERR_MALLOC, map_str, NULL);
-    free(map_str);
+        error_handling_import(ERR_MALLOC, vars->map->map_str, NULL);
     if (!vars->map->map[0])
         error_handling_vars(ERR_MAP_H, vars);
     map_dimensions(vars);
-    is_map_valid(vars);
     print_map(vars);
+    is_map_valid(vars);
     free_map(vars);
 }
 

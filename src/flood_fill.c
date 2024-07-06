@@ -6,32 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:11:46 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/05 15:03:58 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:52:46 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// void clone_map(t_vars *vars)
-// {
-//     char **map_copy;
-//     int i;
-
-//     char **map_copy = malloc((vars->map->h + 1) * sizeof(char *));
-//     if (map_copy == NULL)
-//         exit(0);
-//     i = 0;
-//     while (i < vars->map->h)
-//     {
-//         map_copy[i] = malloc((strlen(original[i]) + 1) * sizeof(char));
-
-//         i++;
-//     }
-//     for (int i = 0; i < num_strings; i++) {
-//     strcpy(copy[i], original[i]);
-// }
-// copy[num_strings] = NULL; // terminate the copy array with a NULL pointer
-// }
 
 /*
  * Checks if current position is outside of map boundaries, is a wall or is a
@@ -39,22 +18,32 @@
  * itself for positions above and below, and to the left and right.
  */
 
-void fill(t_map *map, int p_y, int p_x)
+void fill(char **map, int p_y, int p_x, t_vars *vars)
 {
-    if (p_y < 0 || p_y >= map->h || p_x < 0 || p_x >= map->w ||
-    map->map[p_y][p_x] == '1' || map->map[p_y][p_x] == '*') 
+    if (p_y < 0 || p_y >= vars->map->h || p_x < 0 || p_x >= vars->map->w ||
+    map[p_y][p_x] == '1' || map[p_y][p_x] == '*') 
         return;
 
-    if (map->map[p_y][p_x] == 'C')
-        map->coin_count -= 1;
-    if (map->map[p_y][p_x] == 'E')
-        map->exit_count -= 1;
-    map->map[p_y][p_x] = '*';
-    fill(map, p_y - 1, p_x);
-    fill(map, p_y, p_x - 1);
-    fill(map, p_y + 1, p_x);
-    fill(map, p_y, p_x + 1);
+    if (map[p_y][p_x] == 'C')
+        vars->map->coin_count -= 1;
+    if (map[p_y][p_x] == 'E')
+        vars->map->exit_count -= 1;
+    map[p_y][p_x] = '*';
+    fill(map, p_y - 1, p_x, vars);
+    fill(map, p_y, p_x - 1, vars);
+    fill(map, p_y + 1, p_x, vars);
+    fill(map, p_y, p_x + 1, vars);
 }
+
+void print_map_clone (char **map, int height)
+{
+    ft_printf("\n");
+    int i = 0;
+    while (i < height)
+        ft_printf("%s\n", (map[i++]));
+    ft_printf("\n");
+}
+
 
 /*
  * Sends map to recursive fill function to calculate reachable tiles.
@@ -63,19 +52,19 @@ void fill(t_map *map, int p_y, int p_x)
 
 void flood_fill(t_vars *vars)
 {
-    t_map *fmap;
-    fmap = vars->map;
+    char **map_clone;
+    int c_count;
 
-    fill(fmap, fmap->p_y, fmap->p_x);
-    
-    ft_printf("\n");
-    int i = 0;
-    while (i < fmap->h)
-        ft_printf("%s\n", (fmap->map[i++]));
-    ft_printf("\n");
-
-    if (fmap->coin_count != 0)
+    c_count = vars->map->coin_count;
+    map_clone = ft_split(vars->map->map_str, '\n');
+    if (map_clone == NULL)
+        error_handling_vars(ERR_MALLOC, vars);
+    fill(map_clone, vars->map->p_y, vars->map->p_x, vars);
+    print_map_clone(map_clone, vars->map->h); // !
+    free_vector(map_clone, vars->map->h);
+    if (vars->map->coin_count != 0)
         error_handling_vars(ERR_COIN, vars);
-    if (fmap->exit_count != 0)
+    if (vars->map->exit_count != 0)
         error_handling_vars(ERR_EXITU, vars);
+    vars->map->coin_count = c_count;
 }

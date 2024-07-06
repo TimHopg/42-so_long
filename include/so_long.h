@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/04 15:41:51 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:52:42 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 typedef struct s_map
 {
 	char **map;
+	char *map_str;
 	int exit_x;
 	int exit_y;
 	int exit_count;
@@ -65,6 +66,7 @@ typedef struct s_vars
 } t_vars;
 
 void free_map(t_vars *vars);
+void free_vector(char **vect, int len);
 void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
 int is_map_valid(t_vars *vars);

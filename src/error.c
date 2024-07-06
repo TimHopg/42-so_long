@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 21:02:07 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/01 12:21:37 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:53:19 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,34 @@ void print_error_msg(char *error_code)
     ft_printf(error_code);
 }
 
-void free_all(t_vars *vars)
+// void free_all(t_vars *vars)
+// {
+//     int i;
+
+//     i = 0;
+//     while (i < vars->map->h)
+//     {
+//         if (vars->map->map[i])
+//             free(vars->map->map[i]);
+//         i++;
+//     }
+// }
+
+void free_vector(char **vect, int len)
 {
     int i;
 
     i = 0;
-    while (i < vars->map->h)
-    {
-        if (vars->map->map[i])
-            free(vars->map->map[i]);
-        i++;
-    }
+    while (i < len)
+        free(vect[i++]);
+    free(vect);
 }
 
 void free_map(t_vars *vars)
 {
-    int i;
 
-    i = 0;
-    while (i < vars->map->h)
-        free(vars->map->map[i++]);
-    free(vars->map->map);
+    free(vars->map->map_str);
+    free_vector(vars->map->map, vars->map->h);
     free(vars->map);
 }
 

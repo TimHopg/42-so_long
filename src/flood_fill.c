@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:11:46 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 17:21:36 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/07 10:39:58 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void flood_fill(t_vars *vars)
     if (map_clone == NULL)
         error_handling_vars(ERR_MALLOC, vars);
     fill(map_clone, vars->map->p_y, vars->map->p_x, vars);
-    print_map_clone(map_clone, vars->map->h); // !
+    // print_map_clone(map_clone, vars->map->h); // !
     free_vector(map_clone, vars->map->h);
     if (vars->map->coin_count != 0)
         error_handling_vars(ERR_COIN, vars);

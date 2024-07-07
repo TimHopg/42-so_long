@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 16:54:41 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:57:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@
 #define ERR_COIN "Some coins unreachable\n"
 #define ERR_EXITU "Exit unreachable\n"
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		h;
+	int		w;
+	int		bpp;
+	int		endian;
+	int		line_len;
+} t_img;
+
 typedef struct s_map
 {
 	char **map;
@@ -64,7 +75,8 @@ typedef struct s_vars
 	void *win;
 	int win_w;
 	int win_h;
-	void *sprites[5];
+	void *gfx[5];
+	// int *bg;
 	t_map *map;
 } t_vars;
 
@@ -72,11 +84,15 @@ void free_map(t_vars *vars);
 void free_vector(char **vect, int len);
 void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
+void error_handling_all(char *error_code, t_vars *vars);
 int is_map_valid(t_vars *vars);
 void flood_fill(t_vars *vars);
 void parse_map(int fd, t_vars *vars);
 void print_map(t_vars *vars);
+void load_xpm(t_vars *vars);
 int main(int ac, char **av);
+
+void load_background(t_vars *vars);
 
 // Events
 // enum

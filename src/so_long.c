@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/06 17:09:13 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:59:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,61 +17,20 @@
  * Optimise by only rendering visible tiles.
  */
 
-# define MAP_WIDTH 20
-# define MAP_HEIGHT 15
+// # define WINDOW_WIDTH MAP_WIDTH * TILE_SIZE // 640
+// # define WINDOW_HEIGHT MAP_HEIGHT * TILE_SIZE // 480
 
-# define WINDOW_WIDTH MAP_WIDTH * TILE_SIZE // 640
-# define WINDOW_HEIGHT MAP_HEIGHT * TILE_SIZE // 480
-
-// typedef struct s_data
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }			t_data;
-
-int	close_window(t_vars *vars)
+int close_window(t_vars *vars)
 {
-	if (vars->win)
-		mlx_destroy_window(vars->mlx, vars->win);
-	if (vars->mlx)
-		free(vars->mlx);
-
+	free_map(vars);
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
 	exit(0);
 	// return (0);
 }
 
-void render_background(t_vars *vars, void *sprites[])
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < MAP_HEIGHT)
-	{
-		x = 0;
-		while (x < MAP_WIDTH)
-		{
-			mlx_put_image_to_window(vars->mlx, vars->win, sprites[0], x * TILE_SIZE, y * TILE_SIZE);
-			x++;
-		}
-		y++;
-	}
-}
-
-// void render_map(void *mlx, void *win, void *tiles[])
-// {
-//     for (int y = 0; y < MAP_HEIGHT; y++) {
-//         for (int x = 0; x < MAP_WIDTH; x++) {
-//             int tile_type = map[y][x];
-//             mlx_put_image_to_window(mlx, win, tiles[tile_type], x * TILE_SIZE, y * TILE_SIZE);
-//         }
-//     }
-// }
-
-int	key_press(int keysym, t_vars *vars)
+int key_press(int keysym, t_vars *vars)
 {
 	if (keysym == XK_Escape) // 65307 == esc linux
 		close_window(vars);
@@ -86,9 +45,9 @@ int	key_press(int keysym, t_vars *vars)
 	return (0);
 }
 
-// void tile(void *img, t_vars *vars)
-// {
-// }
+/*
+ * Parses fd if arguments are 1 and of .ber file extension.
+ */
 
 int parse_fd(int ac, char **av)
 {
@@ -108,6 +67,57 @@ int parse_fd(int ac, char **av)
 	return (fd);
 }
 
+void my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char *dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void make_bg(t_img *img, t_vars *vars)
+{
+	int x;
+	int y;
+
+    y = 0;
+    while (y < vars->map->h * TILE_SIZE)
+    {
+        x = 0;
+        while (x < vars->map->w * TILE_SIZE)
+        {
+			my_mlx_pixel_put(img, x, y, 0xFFFF0000);
+            x++;
+        }
+        y++;
+    }
+}
+
+void initialise_game(t_vars *vars)
+{
+	vars->mlx = mlx_init();
+	if (vars->mlx == NULL)
+		error_handling_vars(ERR_MALLOC, vars);
+	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, "Thanks For All The Fish!");
+	if (vars->win == NULL)
+		error_handling_all(ERR_MALLOC, vars);
+
+
+	// mlx_clear_window(vars->mlx, vars->win);
+
+
+	// t_img img;
+	// img.img_ptr = mlx_new_image(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE);
+	// img.addr = mlx_get_data_addr(img.img_ptr, &img.bpp, &img.line_len, &img.endian);
+	// make_bg(&img, vars);
+	// mlx_put_image_to_window(vars->mlx, vars->win, img.img_ptr, 0, 0);
+	
+	
+	// load_xpm(vars);
+	load_background(vars);
+}
+
+
 /*
  TODO destroy display on linux machines? necessary?
  TODO use shell command to edit mlx library file that throws warning during compile
@@ -116,54 +126,36 @@ int parse_fd(int ac, char **av)
  ! MEMORY map, textures, window, (display), mlx
  */
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-
-	/* char	*relative_path = "./sprites/field.xpm"; */
-
 	int fd;
-	t_vars	vars;
+	t_vars vars;
 
+	ft_bzero(&vars, sizeof(t_vars));
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
-	free_map(&vars); // ! only for testing
-
-/* 	(void)av;
-	(void)vars;
-	(void)fd;
-
-	char *str = "\n";
-	char **out;
-	out = ft_split(str, '\n');
-	ft_printf("%s out\n", out[0]);
-	ft_printf("%s out\n", out[1]);
-	free(out); */
-
-/*	
-	int		img_size;
-
-	img_size = TILE_SIZE;
-	vars.mlx = mlx_init();
-	if (vars.mlx == NULL)
-        error_handling(ERR_MALLOC, &vars); */
+	initialise_game(&vars);
 
 
-/* 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Thanks For All The Fish!");
-	if (vars.win == NULL)
-        error_handling(ERR_MALLOC, &vars); */
-
-
-
-	// img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-	// &img.line_length, &img.endian);
-
-/* 	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
-	render_background(&vars, vars.sprites);
+	// t_img img;
+	// img.img = mlx_new_image(vars.mlx, vars.map->w * TILE_SIZE, vars.map->h * TILE_SIZE);
+	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	// make_bg(&img, &vars);
+	// mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 
 	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
 	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, close_window, &vars);
-	mlx_loop(vars.mlx); */
+	mlx_loop(vars.mlx);
+	mlx_destroy_image(vars.mlx, vars.gfx[0]);
+	free(vars.gfx[0]);
+	close_window(&vars);
+	return (0);
+
+	/* 	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
+		render_background(&vars, vars.sprites);
+
+		mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
+		mlx_loop(vars.mlx); */
 }
 
 /*
@@ -179,4 +171,7 @@ int	main(int ac, char **av)
  * if (one_of_the_four_adjacent_directions_is_possible)
  *	return (map_valid);
  * return (map_invalid);
+ TODO change error management to have access to free map, vars, all etc.
+	TODO create free.c file with all frees and errors stay in error.c
+ * destroy_display is to clear mlx init on certain mlx versions
  */

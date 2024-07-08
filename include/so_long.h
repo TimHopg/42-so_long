@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/07 20:57:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:34:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_vars
 	int win_w;
 	int win_h;
 	void *gfx[5];
+	t_img xpm[6];
 	// int *bg;
 	t_map *map;
 } t_vars;

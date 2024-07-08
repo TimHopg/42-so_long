@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/07 21:26:37 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:36:46 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 #define BG 0
 #define FIELD 1
 #define WALL 2
+#define COIN 3
+#define PF 4
+#define CHESTC 5
+#define CHESTO 6
 
-void	put_pixel_img(t_img img, int x, int y, int color);
+void put_pixel_img(t_img img, int x, int y, int color);
 
 // void render_map(void *mlx, void *win, void *tiles[])
 // {
@@ -63,48 +67,48 @@ t_img new_img(int w, int h, t_vars *vars)
     return (image);
 }
 
-t_img	new_file_img(char * path, t_vars *vars) {
-	t_img image;
+t_img new_file_img(char *path, t_vars *vars)
+{
+    t_img image;
 
-	image.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &image.w, &image.h);
+    image.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &image.w, &image.h);
     image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp), &(image.line_len), &(image.endian));
-	return (image);
+    return (image);
 }
 
-void	put_pixel_img(t_img img, int x, int y, int color)
+void put_pixel_img(t_img img, int x, int y, int color)
 {
-	char	*dst;
+    char *dst;
 
-	if (color == (int)0xFF000000)
-		return ;
-	if (x >= 0 && y >= 0 && x < img.w && y < img.h) {
-		dst = img.addr + (y * img.line_len + x * (img.bpp / 8));
-		*(unsigned int *) dst = color;
-	}
-}
-
-void render_map(t_vars *vars)
-{
-    int x;
-    int y;
-
-    y = 0;
-    while (y < vars->map->h)
+    if (color == (int)0xFF000000)
+        return;
+    if (x >= 0 && y >= 0 && x < img.w && y < img.h)
     {
-        x = 0;
-        while (x < vars->map->w)
-        {
-            if (vars->map->map[y][x] == '0')
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[FIELD], x * TILE_SIZE, y * TILE_SIZE);
-            if (vars->map->map[y][x] == '1')
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[WALL], x * TILE_SIZE, y * TILE_SIZE);
-            x++;
-        }
-        y++;
+        dst = img.addr + (y * img.line_len + x * (img.bpp / 8));
+        *(unsigned int *)dst = color;
     }
 }
 
+// void render_map(t_vars *vars)
+// {
+//     int x;
+//     int y;
 
+//     y = 0;
+//     while (y < vars->map->h)
+//     {
+//         x = 0;
+//         while (x < vars->map->w)
+//         {
+//             if (vars->map->map[y][x] == '0')
+//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[FIELD], x * TILE_SIZE, y * TILE_SIZE);
+//             if (vars->map->map[y][x] == '1')
+//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[WALL], x * TILE_SIZE, y * TILE_SIZE);
+//             x++;
+//         }
+//         y++;
+//     }
+// }
 
 // void create_bg(t_vars *vars)
 // {
@@ -120,38 +124,91 @@ void render_map(t_vars *vars)
 //     }
 // }
 
-void load_xpm(t_vars *vars)
+// void load_xpm(t_vars *vars)
+// {
+//     int img_size;
+
+//     img_size = TILE_SIZE;
+//     // create_bg(vars);
+//     // mlx_set_window_bg_img(vars->win, vars->bg, vars->map->w, vars->map->h);
+//     // mlx_put_image_to_window(vars->mlx, vars->mlx, vars->bg, vars->map->w, vars->map->h);
+
+//     vars->gfx[1] = mlx_xpm_file_to_image(vars->mlx, "gfx/field.xpm", &img_size, &img_size);
+//     vars->gfx[2] = mlx_xpm_file_to_image(vars->mlx, "gfx/wall.xpm", &img_size, &img_size);
+//     render_map(vars);
+// }
+
+void load_gfx(t_vars *vars)
 {
-    int img_size;
+    // ft_bzero(vars->xpm, sizeof(t_img) * 5);
+    vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, vars);
+    vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
+    vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
+    vars->xpm[COIN] = new_file_img("gfx/coin.xpm", vars);
+    vars->xpm[PF] = new_file_img("gfx/pf.xpm", vars);
+    vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
+    // render_map(vars);
+    // malloc checks
+}
 
-    img_size = TILE_SIZE;
-    // create_bg(vars);
-    // mlx_set_window_bg_img(vars->win, vars->bg, vars->map->w, vars->map->h);
-    // mlx_put_image_to_window(vars->mlx, vars->mlx, vars->bg, vars->map->w, vars->map->h);
+void render_map(t_vars *vars)
+{
+    int x;
+    int y;
 
-    vars->gfx[1] = mlx_xpm_file_to_image(vars->mlx, "gfx/field.xpm", &img_size, &img_size);
-    vars->gfx[2] = mlx_xpm_file_to_image(vars->mlx, "gfx/wall.xpm", &img_size, &img_size);
-    render_map(vars);
+    y = 0;
+    while (y < vars->map->h)
+    {
+        x = 0;
+        while (x < vars->map->w)
+        {
+            put_img_to_img(vars->xpm[BG], vars->xpm[FIELD], x * TILE_SIZE, y * TILE_SIZE);
+            if (vars->map->map[y][x] == '1')
+                put_img_to_img(vars->xpm[BG], vars->xpm[WALL], x * TILE_SIZE, y * TILE_SIZE);
+            if (vars->map->map[y][x] == 'P')
+                put_img_to_img(vars->xpm[BG], vars->xpm[PF], x * TILE_SIZE, y * TILE_SIZE);
+            if (vars->map->map[y][x] == 'C')
+                put_img_to_img(vars->xpm[BG], vars->xpm[COIN], x * TILE_SIZE, y * TILE_SIZE);
+            if (vars->map->map[y][x] == 'E')
+                put_img_to_img(vars->xpm[BG], vars->xpm[CHESTC], x * TILE_SIZE, y * TILE_SIZE);
+            x++;
+        }
+        y++;
+    }
 }
 
 void load_background(t_vars *vars)
 {
-    t_img base_image;
-    t_img bg;
-    t_img ring;
 
-    base_image = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, vars);
-    {
-        bg = new_file_img("gfx/field.xpm", vars);
-        if (!bg.img_ptr)
-            exit (2); // !
-        put_img_to_img(base_image, bg, 0, 0);
-    }
-    {
-        ring = new_file_img("gfx/wall.xpm", vars);
-        if (!ring.img_ptr)
-            exit (2); // !
-        put_img_to_img(base_image, ring, 0, 0);
-    }
-    mlx_put_image_to_window(vars->mlx, vars->win, base_image.img_ptr, 0, 0);
+    load_gfx(vars);
+    render_map(vars);
+    // {
+    //     put_img_to_img(vars->xpm[0], vars->xpm[FIELD], 0, 0);
+    // }
+    // {
+    //     put_img_to_img(vars->xpm[0], vars->xpm[WALL], 0, 0);
+    // }
+    mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[0].img_ptr, 0, 0);
 }
+
+// void load_background(t_vars *vars)
+// {
+//     t_img base_image;
+//     t_img bg;
+//     t_img ring;
+
+//     base_image = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, vars);
+//     {
+//         bg = new_file_img("gfx/field.xpm", vars);
+//         if (!bg.img_ptr)
+//             exit(2); // !
+//         put_img_to_img(base_image, bg, 0, 0);
+//     }
+//     {
+//         ring = new_file_img("gfx/wall.xpm", vars);
+//         if (!ring.img_ptr)
+//             exit(2); // !
+//         put_img_to_img(base_image, ring, 0, 0);
+//     }
+//     mlx_put_image_to_window(vars->mlx, vars->win, base_image.img_ptr, 0, 0);
+// }

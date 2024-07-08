@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 13:32:46 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:08:28 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@
  * Optimise by only rendering visible tiles.
  */
 
-void free_gfx(t_vars *vars);
-
-
-int close_window(t_vars *vars)
-{
-	free_map(vars);
-	free_gfx(vars);
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	exit(0);
-	// return (0);
-}
 
 int key_press(int keysym, t_vars *vars)
 {
@@ -68,32 +55,6 @@ int parse_fd(int ac, char **av)
 	return (fd);
 }
 
-void my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char *dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void make_bg(t_img *img, t_vars *vars)
-{
-	int x;
-	int y;
-
-    y = 0;
-    while (y < vars->map->h * TILE_SIZE)
-    {
-        x = 0;
-        while (x < vars->map->w * TILE_SIZE)
-        {
-			my_mlx_pixel_put(img, x, y, 0xFFFF0000);
-            x++;
-        }
-        y++;
-    }
-}
-
 void initialise_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
@@ -103,21 +64,6 @@ void initialise_game(t_vars *vars)
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
-}
-
-void free_gfx(t_vars *vars)
-{
-	int x;
-
-	x = 0;
-	while (x < XPM_MAX)
-	{
-		if (vars->xpm[x].img_ptr)
-		{
-			mlx_destroy_image(vars->mlx, vars->xpm[x].img_ptr);
-		}
-		x++;
-	}
 }
 
 /*

@@ -6,11 +6,26 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 21:02:07 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 13:28:58 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:06:03 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void free_gfx(t_vars *vars)
+{
+	int x;
+
+	x = 0;
+	while (x < XPM_MAX)
+	{
+		if (vars->xpm[x].img_ptr)
+		{
+			mlx_destroy_image(vars->mlx, vars->xpm[x].img_ptr);
+		}
+		x++;
+	}
+}
 
 /*
  * Prints "Error" followed by custom error message
@@ -85,4 +100,15 @@ void error_handling_all(char *error_code, t_vars *vars)
     }
     print_error_msg(error_code);
     exit(1);
+}
+
+int close_window(t_vars *vars)
+{
+	free_map(vars);
+	free_gfx(vars);
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	exit(0);
+	// return (0);
 }

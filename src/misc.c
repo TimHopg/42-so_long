@@ -103,3 +103,29 @@
 
 		mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
 		mlx_loop(vars.mlx); */
+
+		// void my_mlx_pixel_put(t_img *img, int x, int y, int color)
+// {
+// 	char *dst;
+
+// 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	*(unsigned int *)dst = color;
+// }
+
+// void make_bg(t_img *img, t_vars *vars)
+// {
+// 	int x;
+// 	int y;
+
+//     y = 0;
+//     while (y < vars->map->h * TILE_SIZE)
+//     {
+//         x = 0;
+//         while (x < vars->map->w * TILE_SIZE)
+//         {
+// 			my_mlx_pixel_put(img, x, y, 0xFFFF0000);
+//             x++;
+//         }
+//         y++;
+//     }
+// }

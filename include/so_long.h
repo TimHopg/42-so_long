@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 13:28:08 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:11:21 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,13 @@ typedef struct s_vars
 	void *win;
 	int win_w;
 	int win_h;
-	void *gfx[5];
 	t_img xpm[XPM_MAX];
-	// int *bg;
 	t_map *map;
 } t_vars;
 
 void free_map(t_vars *vars);
 void free_vector(char **vect, int len);
-void free_gfx(t_vars *vars);
+int close_window(t_vars *vars);
 void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
 void error_handling_all(char *error_code, t_vars *vars);

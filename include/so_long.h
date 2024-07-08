@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 19:24:10 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:08:06 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_vars
 	int win_w;
 	int win_h;
 	int moves;
+	// int game_state;
 	unsigned long frame;
 	t_img xpm[XPM_MAX];
 	t_map *map;

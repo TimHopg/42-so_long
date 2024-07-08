@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:41:57 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 19:41:21 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:18:53 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void move_up(t_vars *vars)
         (void)0;
     else
     {
-        ft_printf("Moves: %d\n", vars->moves++);
+        ft_printf("Moves: %d\n", ++(vars->moves));
         move(vars, PB, 0, -1);
     }
 }
@@ -45,7 +45,7 @@ void move_down(t_vars *vars)
         (void)0;
     else
     {
-        ft_printf("Moves: %d\n", vars->moves++);
+        ft_printf("Moves: %d\n", ++(vars->moves));
         move(vars, PF, 0, 1);
     }
 }
@@ -56,7 +56,7 @@ void move_right(t_vars *vars)
         (void)0;
     else
     {
-        ft_printf("Moves: %d\n", vars->moves++);
+        ft_printf("Moves: %d\n", ++(vars->moves));
         move(vars, PR, 1, 0);
     }
 }
@@ -67,7 +67,7 @@ void move_left(t_vars *vars)
         (void)0;
     else
     {
-        ft_printf("Moves: %d\n", vars->moves++);
+        ft_printf("Moves: %d\n", ++(vars->moves));
         move(vars, PL, -1, 0);
     }
 }

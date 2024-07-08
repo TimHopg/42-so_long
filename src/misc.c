@@ -129,3 +129,16 @@
 //         y++;
 //     }
 // }
+
+	// mlx_loop_hook(vars->mlx, hook_main, vars);
+
+	// void hook_main(void *param)
+// {
+// 	t_vars *vars;
+
+// 	vars = (t_vars *)param;
+// 	vars->frame++;
+// 	if (vars->frame % 5)
+// 		return ;
+	
+// }

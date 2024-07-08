@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 19:43:00 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:17:29 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * Map is 640 * 480. 20x15 tiles of 32x32 pixels.
  * Optimise by only rendering visible tiles.
  */
+
 
 
 int key_press(int keysym, t_vars *vars)
@@ -36,7 +37,13 @@ int key_press(int keysym, t_vars *vars)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 		vars->map->coin_count -= 1;
 	}
-	// ft_printf("%d move count\n", vars->moves);
+	if (vars->map->coin_count == -1
+		&& vars->map->p_x == vars->map->exit_x
+		&& vars->map->p_y == vars->map->exit_y)
+		{
+			ft_printf("You Win!\n");
+			mlx_loop_end(vars->mlx);
+		}
 	return (0);
 }
 
@@ -70,24 +77,13 @@ void initialise_game(t_vars *vars)
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
+	// vars->moves = 1;
 }
-
-// void hook_main(void *param)
-// {
-// 	t_vars *vars;
-
-// 	vars = (t_vars *)param;
-// 	vars->frame++;
-// 	if (vars->frame % 5)
-// 		return ;
-	
-// }
 
 void run_game(t_vars *vars)
 {
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
-	// mlx_loop_hook(vars->mlx, hook_main, vars);
 	mlx_loop(vars->mlx);
 }
 

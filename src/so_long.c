@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 14:08:28 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:43:00 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,26 @@ int key_press(int keysym, t_vars *vars)
 	if (keysym == XK_Escape) // 65307 == esc linux
 		close_window(vars);
 	if (keysym == XK_w)
-		ft_printf("W\n");
+		move_up(vars);
 	if (keysym == XK_a)
-		ft_printf("A\n");
+		move_left(vars);
 	if (keysym == XK_s)
-		ft_printf("S\n");
+		move_down(vars);
 	if (keysym == XK_d)
-		ft_printf("D\n");
+		move_right(vars);
+	if (vars->map->coin_count == 0)
+	{
+		put_img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x * TILE_SIZE) + 8, (vars->map->exit_y * TILE_SIZE) + 8);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+		vars->map->coin_count -= 1;
+	}
+	// ft_printf("%d move count\n", vars->moves);
 	return (0);
 }
 
 /*
  * Parses fd if arguments are 1 and of .ber file extension.
  */
-
 int parse_fd(int ac, char **av)
 {
 	int fd;
@@ -66,6 +72,25 @@ void initialise_game(t_vars *vars)
 	load_background(vars);
 }
 
+// void hook_main(void *param)
+// {
+// 	t_vars *vars;
+
+// 	vars = (t_vars *)param;
+// 	vars->frame++;
+// 	if (vars->frame % 5)
+// 		return ;
+	
+// }
+
+void run_game(t_vars *vars)
+{
+	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
+	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
+	// mlx_loop_hook(vars->mlx, hook_main, vars);
+	mlx_loop(vars->mlx);
+}
+
 /*
  TODO destroy display on linux machines? necessary?
  TODO use shell command to edit mlx library file that throws warning during compile
@@ -84,10 +109,7 @@ int main(int ac, char **av)
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 	initialise_game(&vars);
-
-	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
-	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, close_window, &vars);
-	mlx_loop(vars.mlx);
+	run_game(&vars);
 	close_window(&vars);
 	return (0);
 }

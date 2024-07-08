@@ -6,19 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 14:03:08 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:24:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-#define BG 0
-#define FIELD 1
-#define WALL 2
-#define COIN 3
-#define PF 4
-#define CHESTC 5
-#define CHESTO 6
 
 void put_pixel_img(t_img img, int x, int y, int color);
 
@@ -87,8 +79,12 @@ void load_gfx(t_vars *vars)
     vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
     vars->xpm[COIN] = new_file_img("gfx/coin.xpm", vars);
     vars->xpm[PF] = new_file_img("gfx/pf.xpm", vars);
+    vars->xpm[PB] = new_file_img("gfx/pb.xpm", vars);
+    vars->xpm[PL] = new_file_img("gfx/pl.xpm", vars);
+    vars->xpm[PR] = new_file_img("gfx/pr.xpm", vars);
     vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
-    if (!(vars->xpm[BG].img_ptr) || !(vars->xpm[FIELD].img_ptr) || !(vars->xpm[WALL].img_ptr) || !(vars->xpm[PF].img_ptr) || !(vars->xpm[COIN].img_ptr) || !(vars->xpm[CHESTC].img_ptr))
+    vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
+    if (!(vars->xpm[BG].img_ptr) || !(vars->xpm[FIELD].img_ptr) || !(vars->xpm[WALL].img_ptr) || !(vars->xpm[PF].img_ptr) || !(vars->xpm[COIN].img_ptr) || !(vars->xpm[CHESTC].img_ptr|| !(vars->xpm[CHESTC].img_ptr) || !(vars->xpm[CHESTO].img_ptr)))
         error_handling_all(ERR_MALLOC, vars);
     // malloc checks
 }

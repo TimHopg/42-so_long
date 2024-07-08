@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 14:11:21 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:24:10 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #define TILE_SIZE 32
 #define VALID_CHARS "01CEP"
 
-// Errors
+// Error strings
 #define ERR_MALLOC "Malloc error\n"
 #define ERR_NOMAP "No map file given\n"
 #define ERR_ARGS "Too many arguments given\n"
@@ -43,7 +43,18 @@
 #define ERR_COIN "Some coins unreachable\n"
 #define ERR_EXITU "Exit unreachable\n"
 
-#define XPM_MAX 7
+// Image macros
+#define XPM_MAX 10
+#define BG 0
+#define FIELD 1
+#define WALL 2
+#define COIN 3
+#define PF 4
+#define PB 7
+#define PL 8
+#define PR 9
+#define CHESTC 5
+#define CHESTO 6
 
 typedef struct s_img
 {
@@ -77,6 +88,8 @@ typedef struct s_vars
 	void *win;
 	int win_w;
 	int win_h;
+	int moves;
+	unsigned long frame;
 	t_img xpm[XPM_MAX];
 	t_map *map;
 } t_vars;
@@ -92,6 +105,12 @@ void flood_fill(t_vars *vars);
 void parse_map(int fd, t_vars *vars);
 void print_map(t_vars *vars);
 void load_xpm(t_vars *vars);
+void move_up(t_vars *vars);
+void move_down(t_vars *vars);
+void move_right(t_vars *vars);
+void move_left(t_vars *vars);
+void put_img_to_img(t_img dst, t_img src, int x, int y);
+
 int main(int ac, char **av);
 
 void load_background(t_vars *vars);

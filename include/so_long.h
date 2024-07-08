@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 11:34:44 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:28:08 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 #define ERR_COIN "Some coins unreachable\n"
 #define ERR_EXITU "Exit unreachable\n"
 
+#define XPM_MAX 7
+
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -76,13 +78,14 @@ typedef struct s_vars
 	int win_w;
 	int win_h;
 	void *gfx[5];
-	t_img xpm[6];
+	t_img xpm[XPM_MAX];
 	// int *bg;
 	t_map *map;
 } t_vars;
 
 void free_map(t_vars *vars);
 void free_vector(char **vect, int len);
+void free_gfx(t_vars *vars);
 void error_handling_vars(char *error_code, t_vars *vars);
 void error_handling_import(char *error_code, char *str1, char *str2);
 void error_handling_all(char *error_code, t_vars *vars);

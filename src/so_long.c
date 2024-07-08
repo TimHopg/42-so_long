@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/07 20:59:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:32:46 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
  * Optimise by only rendering visible tiles.
  */
 
-// # define WINDOW_WIDTH MAP_WIDTH * TILE_SIZE // 640
-// # define WINDOW_HEIGHT MAP_HEIGHT * TILE_SIZE // 480
+void free_gfx(t_vars *vars);
+
 
 int close_window(t_vars *vars)
 {
 	free_map(vars);
+	free_gfx(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
@@ -101,28 +102,30 @@ void initialise_game(t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, "Thanks For All The Fish!");
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
-
-
-	// mlx_clear_window(vars->mlx, vars->win);
-
-
-	// t_img img;
-	// img.img_ptr = mlx_new_image(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE);
-	// img.addr = mlx_get_data_addr(img.img_ptr, &img.bpp, &img.line_len, &img.endian);
-	// make_bg(&img, vars);
-	// mlx_put_image_to_window(vars->mlx, vars->win, img.img_ptr, 0, 0);
-	
-	
-	// load_xpm(vars);
 	load_background(vars);
 }
 
+void free_gfx(t_vars *vars)
+{
+	int x;
+
+	x = 0;
+	while (x < XPM_MAX)
+	{
+		if (vars->xpm[x].img_ptr)
+		{
+			mlx_destroy_image(vars->mlx, vars->xpm[x].img_ptr);
+		}
+		x++;
+	}
+}
 
 /*
  TODO destroy display on linux machines? necessary?
  TODO use shell command to edit mlx library file that throws warning during compile
  TODO use keysym instead of keycode (X11/keysym.h)
  TODO silence write value warning on compile of mlx (cc/clang)
+ TODO if graphics file is missing. handle!
  ! MEMORY map, textures, window, (display), mlx
  */
 
@@ -136,26 +139,11 @@ int main(int ac, char **av)
 	parse_map(fd, &vars);
 	initialise_game(&vars);
 
-
-	// t_img img;
-	// img.img = mlx_new_image(vars.mlx, vars.map->w * TILE_SIZE, vars.map->h * TILE_SIZE);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	// make_bg(&img, &vars);
-	// mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-
 	mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
 	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, close_window, &vars);
 	mlx_loop(vars.mlx);
-	mlx_destroy_image(vars.mlx, vars.gfx[0]);
-	free(vars.gfx[0]);
 	close_window(&vars);
 	return (0);
-
-	/* 	vars.sprites[0] = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_size, &img_size);
-		render_background(&vars, vars.sprites);
-
-		mlx_hook(vars.win, KeyPress, KeyPressMask, key_press, &vars);
-		mlx_loop(vars.mlx); */
 }
 
 /*

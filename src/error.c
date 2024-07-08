@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 21:02:07 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/07 11:19:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:28:58 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void error_handling_import(char *error_code, char *str1, char *str2)
 void error_handling_all(char *error_code, t_vars *vars)
 {
     free_map(vars);
+    free_gfx(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx)

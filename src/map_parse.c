@@ -6,26 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:21:35 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:51:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*
- ! TEMP function to print map from vars struct
- */
-
-void	print_map(t_vars *vars)
-{
-	int	i;
-
-	ft_printf("\n");
-	i = 0;
-	while (i < vars->map->h)
-		ft_printf("%s\n", (vars->map->map[i++]));
-	ft_printf("\n");
-}
 
 /*
  * Function initialises fields of t_map structure

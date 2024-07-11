@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:26:32 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:45:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * Parses line checking for bad chars and updating e, p, c count/coords
  */
-
 void	parse_line_chars(char *line, t_vars *vars, int h)
 {
 	int	i;
@@ -46,7 +45,6 @@ void	parse_line_chars(char *line, t_vars *vars, int h)
 /*
  * Returns true if invalid char encountered !(0,1,E,P,C)
  */
-
 int	has_invalid_char(char *str, char *valids)
 {
 	while (*str)
@@ -63,7 +61,6 @@ int	has_invalid_char(char *str, char *valids)
 /*
  * Checks wall perimeter of map
  */
-
 void	check_map_perimeter(t_vars *vars)
 {
 	int	i;
@@ -85,7 +82,6 @@ void	check_map_perimeter(t_vars *vars)
 /*
  * Checks validity of map.
  */
-
 int	is_map_valid(t_vars *vars)
 {
 	int	i;

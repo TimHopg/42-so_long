@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:47:47 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:34:31 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "mlx.h"
 # include <fcntl.h>
 # include <limits.h>
-# include <math.h>
+// # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -108,7 +108,6 @@ void				error_handling_all(char *error_code, t_vars *vars);
 int					is_map_valid(t_vars *vars);
 void				flood_fill(t_vars *vars);
 void				parse_map(int fd, t_vars *vars);
-void				print_map(t_vars *vars);
 // Gfx
 void				load_xpm(t_vars *vars);
 void				put_img_to_img(t_img dst, t_img src, int x, int y);
@@ -126,41 +125,12 @@ void				move_left(t_vars *vars);
 // Main
 int					main(int ac, char **av);
 
-// Events
-// enum
-// {
-// 	ON_KEYDOWN = 2,
-// 	ON_KEYUP = 3,
-// 	ON_MOUSEDOWN = 4,
-// 	ON_MOUSEUP = 5,
-// 	ON_MOUSEMOVE = 6,
-// 	ON_EXPOSE = 12,
-// 	ON_DESTROY = 17
-// };
-
 /*
-0 = empty space
-1 = wall
-C = collectible
-E = map exit
-P = player starting position
-
-11111111111111111111
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-10000000000000000001
-11111111111111111111
-
-*/
+ * 0 = empty space
+ * 1 = wall
+ * C = collectible
+ * E = map exit
+ * P = player starting position
+ */
 
 #endif

@@ -6,12 +6,16 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:41:57 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:35:25 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:46:48 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+ * Each move function turns the player if the path is blocked and moves the
+ * the player and prints number of moves to the CL if the path is not.
+ */
 void	move_up(t_vars *vars)
 {
 	if (vars->map->map[vars->map->p_y - 1][vars->map->p_x] == '1')

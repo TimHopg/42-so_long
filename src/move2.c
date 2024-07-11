@@ -6,12 +6,15 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:32:55 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:33:18 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:20:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+ * Moves character, replacing previous tile.
+ */
 void	move(t_vars *vars, int img, int x, int y)
 {
 	put_img_to_img(vars->xpm[BG], vars->xpm[img], ((vars->map->p_x + x)
@@ -32,6 +35,9 @@ void	move(t_vars *vars, int img, int x, int y)
 	vars->map->p_y += y;
 }
 
+/*
+ * Turns character in place if movement direction is blocked.
+ */
 void	turn(t_vars *vars, int img)
 {
 	if (vars->map->map[vars->map->p_y][vars->map->p_x] == 'E')

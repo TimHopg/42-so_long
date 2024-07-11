@@ -6,20 +6,19 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:43:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:33:37 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 /*
- * Map is 640 * 480. 20x15 tiles of 32x32 pixels.
- * Optimise by only rendering visible tiles.
+ * Processes events that are used in the game. Keypresses, all coins collected,
+ * win scenario.
  */
-
 int	key_press(int keysym, t_vars *vars)
 {
-	if (keysym == XK_Escape) // 65307 == esc linux
+	if (keysym == XK_Escape)
 		close_window(vars);
 	if (keysym == XK_w)
 		move_up(vars);
@@ -68,6 +67,9 @@ int	parse_fd(int ac, char **av)
 	return (fd);
 }
 
+/* 
+ * Initialises mlx, window and loads background image
+ */
 void	initialise_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
@@ -78,9 +80,11 @@ void	initialise_game(t_vars *vars)
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
-	// vars->moves = 1;
 }
 
+/*
+ * Initiates the hooks and loops necessary for the game to run.
+ */
 void	run_game(t_vars *vars)
 {
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
@@ -96,8 +100,17 @@ void	run_game(t_vars *vars)
  TODO silence write value warning on compile of mlx (cc/clang)
  TODO if graphics file is missing. handle!
  ! MEMORY map, textures, window, (display), mlx
+  TODO change error management to have access to free map, vars, all etc.
+	TODO create free.c file with all frees and errors stay in error.c
+ * Optimise by only rendering visible tiles.
+ * Do errors need to be printed to stderr?
+ TODO revise makefile flags
  */
 
+/*
+ * Runs game. Loads variables structure and initialises to zero. Parses map
+ * Run's game and then closes elegantly.
+ */
 int	main(int ac, char **av)
 {
 	int		fd;
@@ -112,20 +125,3 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-/*
- * if (all_collectables_collected && exit_count == 1)
- *	return (map_valid);
- * if (on_wall)
- *	return (map_invalid);
- * if (on_collectable)
- *	collectables++;
- * if (on_exit)
- *	exits++;
- * replace_current_position_with_wall;
- * if (one_of_the_four_adjacent_directions_is_possible)
- *	return (map_valid);
- * return (map_invalid);
- TODO change error management to have access to free map, vars, all etc.
-	TODO create free.c file with all frees and errors stay in error.c
- * destroy_display is to clear mlx init on certain mlx versions
- */

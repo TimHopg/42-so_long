@@ -142,3 +142,33 @@
 // 		return ;
 	
 // }
+
+/*
+ ! TEMP Prints vector (map clone)
+ */
+
+void	print_map_clone(char **map, int height)
+{
+	int	i;
+
+	ft_printf("\n");
+	i = 0;
+	while (i < height)
+		ft_printf("%s\n", (map[i++]));
+	ft_printf("\n");
+}
+
+/*
+ ! TEMP function to print map from vars struct
+ */
+
+void	print_map(t_vars *vars)
+{
+	int	i;
+
+	ft_printf("\n");
+	i = 0;
+	while (i < vars->map->h)
+		ft_printf("%s\n", (vars->map->map[i++]));
+	ft_printf("\n");
+}

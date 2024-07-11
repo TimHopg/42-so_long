@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_gfx.c                                         :+:      :+:    :+:   */
+/*   gfx_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:38:31 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:13:35 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+ * Allows transparent pixels to be skipped.
+ */
 unsigned int	get_pixel_img(t_img img, int x, int y)
 {
 	return (*(unsigned int *)((img.addr + (y * img.line_len) + (x * img.bpp
 				/ 8))));
 }
 
+/*
+ * Creates image for background.
+ */
 t_img	new_img(int w, int h, t_vars *vars)
 {
 	t_img	image;
@@ -30,6 +36,9 @@ t_img	new_img(int w, int h, t_vars *vars)
 	return (image);
 }
 
+/*
+ * Creates image struct from file then copies pixel data from that struct
+ */
 t_img	new_file_img(char *path, t_vars *vars)
 {
 	t_img	image;
@@ -40,9 +49,14 @@ t_img	new_file_img(char *path, t_vars *vars)
 	return (image);
 }
 
+/*
+ * Loads background 'BG' image of window size. Loads each XPM file into struct.
+ * Checks for malloc errors and handles appropriately.
+ */
 void	load_gfx(t_vars *vars)
 {
-	// ft_bzero(vars->xpm, sizeof(t_img) * 5);
+	int x;
+
 	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE,
 			vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
@@ -54,14 +68,15 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[PR] = new_file_img("gfx/pr.xpm", vars);
 	vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
 	vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
-	if (!(vars->xpm[BG].img_ptr) || !(vars->xpm[FIELD].img_ptr)
-		|| !(vars->xpm[WALL].img_ptr) || !(vars->xpm[PF].img_ptr)
-		|| !(vars->xpm[COIN].img_ptr) || !(vars->xpm[CHESTC].img_ptr
-			|| !(vars->xpm[CHESTC].img_ptr) || !(vars->xpm[CHESTO].img_ptr)))
-		error_handling_all(ERR_MALLOC, vars);
-	// malloc checks
+	x = -1;
+	while (++x < XPM_MAX)
+		if (!(vars->xpm[x].img_ptr))
+			error_handling_all(ERR_MALLOC, vars);
 }
 
+/*
+ * Loads gfx, renders map and prints image to window
+ */
 void	load_background(t_vars *vars)
 {
 	load_gfx(vars);

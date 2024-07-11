@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 21:02:07 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:44:31 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:26:35 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * Prints "Error" followed by custom error message
  */
-
 void	print_error_msg(char *error_code)
 {
 	ft_printf("Error\n");
@@ -25,7 +24,6 @@ void	print_error_msg(char *error_code)
 /*
  * Handles freeing heap memory after map has been parsed
  */
-
 void	error_handling_vars(char *error_code, t_vars *vars)
 {
 	free_map(vars);
@@ -36,7 +34,6 @@ void	error_handling_vars(char *error_code, t_vars *vars)
 /*
  * Handles freeing memory during map parsing phase
  */
-
 void	error_handling_import(char *error_code, char *str1, char *str2)
 {
 	if (str1)
@@ -47,6 +44,9 @@ void	error_handling_import(char *error_code, char *str1, char *str2)
 	exit(1);
 }
 
+/*
+ * Frees all
+ */
 void	error_handling_all(char *error_code, t_vars *vars)
 {
 	free_map(vars);
@@ -62,6 +62,9 @@ void	error_handling_all(char *error_code, t_vars *vars)
 	exit(1);
 }
 
+/*
+ * Frees all without processing error
+ */
 int	close_window(t_vars *vars)
 {
 	free_map(vars);

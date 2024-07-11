@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:41 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:12:58 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	initialise_map(t_vars *vars, char *map_str)
 {
 	vars->map = ft_calloc(1, sizeof(t_map));
 	if (vars->map == NULL)
-		error_handling_vars(ERR_MALLOC, vars); // !
+		error_handling_vars(ERR_MALLOC, vars);
 	vars->map->map_str = map_str;
 }
 
@@ -86,9 +86,7 @@ void	parse_map(int fd, t_vars *vars)
 	if (!vars->map->map[0])
 		error_handling_vars(ERR_MAP_H, vars);
 	map_dimensions(vars);
-	// print_map(vars);
 	is_map_valid(vars);
-	// print_map(vars);
 }
 
 /*

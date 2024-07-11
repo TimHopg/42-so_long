@@ -6,11 +6,21 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:45 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:41:22 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	extra_line(t_vars *vars)
+{
+	int i;
+	
+	i = -1;
+	while (++i < vars->map->w)
+		put_img_to_img(vars->xpm[BG], vars->xpm[TATA], i * TILE_SIZE, ((vars->map->h) * TILE_SIZE));
+}
+
 
 void	render_map(t_vars *vars)
 {

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 13:08:32 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:47:07 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define ERR_EXITU "Exit unreachable\n"
 
 // Image macros
-# define XPM_MAX 10
+# define XPM_MAX 11
 # define BG 0
 # define FIELD 1
 # define WALL 2
@@ -54,6 +54,7 @@
 # define PR 9
 # define CHESTC 5
 # define CHESTO 6
+# define TATA 10
 
 typedef struct s_img
 {
@@ -114,6 +115,8 @@ void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
 void				render_map(t_vars *vars);
 unsigned int		get_pixel_img(t_img img, int x, int y);
+void				extra_line(t_vars *vars);
+void				render_text(t_vars *vars);
 // Movement
 void				turn(t_vars *vars, int img);
 void				move(t_vars *vars, int img, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:07 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:55:58 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,40 @@ void	initialise_game(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (vars->mlx == NULL)
 		error_handling_vars(ERR_MALLOC, vars);
-	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h
+	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, (vars->map->h + 1)
 			* TILE_SIZE, "Thanks For All The Fish!");
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
 }
 
+// int hook_function(void *param)
+// {
+    
+//     data = (t_data *)param;
+//     // Now you can use data->mlx, data->win, etc.
+//     // Perform your loop operations here
+//     return (0);
+// }
+
 /*
  * Initiates the hooks and loops necessary for the game to run.
  */
 void	run_game(t_vars *vars)
 {
+	// mlx_loop_hook(vars->mlx, )
+	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
 	mlx_loop(vars->mlx);
 }
 
 /*
- TODO use shell command to edit mlx library file that
-	TODO throws warning during compile
- TODO silence write value warning on compile of mlx (cc/clang)
- * Optimise by only rendering visible tiles.
- TODO revise makefile flags
+ ! text that says number of moves and remaining coins
+ ! sprite animation chest opening
+ ! sprite animation character, idle and moving
+ ! enemy + enemy animation
+ ! You Win / You Died / Game Over screen
  */
 
 /*
@@ -117,4 +128,3 @@ int	main(int ac, char **av)
 	close_window(&vars);
 	return (0);
 }
-

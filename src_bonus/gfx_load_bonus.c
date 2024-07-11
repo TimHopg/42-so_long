@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:49 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:46:57 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	load_gfx(t_vars *vars)
 {
 	int x;
 
-	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE,
+	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, (vars->map->h + 1) * TILE_SIZE,
 			vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
 	vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
@@ -68,6 +68,7 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[PR] = new_file_img("gfx/pr.xpm", vars);
 	vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
 	vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
+	vars->xpm[TATA] = new_file_img("gfx/tatami.xpm", vars);
 	x = -1;
 	while (++x < XPM_MAX)
 		if (!(vars->xpm[x].img_ptr))
@@ -81,5 +82,7 @@ void	load_background(t_vars *vars)
 {
 	load_gfx(vars);
 	render_map(vars);
+	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+	render_text(vars);
 }

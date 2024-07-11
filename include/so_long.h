@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 10:44:03 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:47:47 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void				load_xpm(t_vars *vars);
 void				put_img_to_img(t_img dst, t_img src, int x, int y);
 void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
+void				render_map(t_vars *vars);
+unsigned int		get_pixel_img(t_img img, int x, int y);
 // Movement
 void				turn(t_vars *vars, int img);
 void				move(t_vars *vars, int img, int x, int y);

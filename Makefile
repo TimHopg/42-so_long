@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/11 10:35:19 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/11 10:47:06 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ SRC 		= 	so_long.c \
 				map_parse.c \
 				map_validity.c \
 				flood_fill.c \
-				load_gfx.c \
-				render_gfx.c \
+				gfx_load.c \
+				gfx_render.c \
 				move.c \
 				move2.c \
 				error.c \

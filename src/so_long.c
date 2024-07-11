@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 12:33:37 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:00:57 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,10 @@ void	run_game(t_vars *vars)
 }
 
 /*
- TODO destroy display on linux machines? necessary?
  TODO use shell command to edit mlx library file that
 	TODO throws warning during compile
- TODO use keysym instead of keycode (X11/keysym.h)
  TODO silence write value warning on compile of mlx (cc/clang)
- TODO if graphics file is missing. handle!
- ! MEMORY map, textures, window, (display), mlx
-  TODO change error management to have access to free map, vars, all etc.
-	TODO create free.c file with all frees and errors stay in error.c
  * Optimise by only rendering visible tiles.
- * Do errors need to be printed to stderr?
  TODO revise makefile flags
  */
 

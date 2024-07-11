@@ -6,103 +6,63 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 21:02:07 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 14:06:03 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:44:31 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_gfx(t_vars *vars)
-{
-	int x;
-
-	x = 0;
-	while (x < XPM_MAX)
-	{
-		if (vars->xpm[x].img_ptr)
-		{
-			mlx_destroy_image(vars->mlx, vars->xpm[x].img_ptr);
-		}
-		x++;
-	}
-}
-
 /*
  * Prints "Error" followed by custom error message
  */
 
-void print_error_msg(char *error_code)
+void	print_error_msg(char *error_code)
 {
-    ft_printf("Error\n");
-    ft_printf(error_code);
-}
-
-/*
- * Frees all strings in vector then frees vector itself
- */
-
-void free_vector(char **vect, int len)
-{
-    int i;
-
-    i = 0;
-    while (i < len)
-        free(vect[i++]);
-    free(vect);
-}
-
-/*
- * frees fields of map struct
- */
-
-void free_map(t_vars *vars)
-{
-    free(vars->map->map_str);
-    free_vector(vars->map->map, vars->map->h);
-    free(vars->map);
+	ft_printf("Error\n");
+	ft_printf(error_code);
 }
 
 /*
  * Handles freeing heap memory after map has been parsed
  */
 
-void error_handling_vars(char *error_code, t_vars *vars)
+void	error_handling_vars(char *error_code, t_vars *vars)
 {
-    free_map(vars);
-    print_error_msg(error_code);
-    exit(1);
+	free_map(vars);
+	print_error_msg(error_code);
+	exit(1);
 }
 
 /*
  * Handles freeing memory during map parsing phase
  */
 
-void error_handling_import(char *error_code, char *str1, char *str2)
+void	error_handling_import(char *error_code, char *str1, char *str2)
 {
-    if (str1)
-        free(str1);
-    if (str2)
-        free(str2);
-    print_error_msg(error_code);
-    exit(1);
+	if (str1)
+		free(str1);
+	if (str2)
+		free(str2);
+	print_error_msg(error_code);
+	exit(1);
 }
 
-void error_handling_all(char *error_code, t_vars *vars)
+void	error_handling_all(char *error_code, t_vars *vars)
 {
-    free_map(vars);
-    free_gfx(vars);
+	free_map(vars);
+	free_gfx(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx)
-    {
-        mlx_destroy_display(vars->mlx);
+	{
+		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
-    }
-    print_error_msg(error_code);
-    exit(1);
+	}
+	print_error_msg(error_code);
+	exit(1);
 }
 
-int close_window(t_vars *vars)
+int	close_window(t_vars *vars)
 {
 	free_map(vars);
 	free_gfx(vars);
@@ -110,5 +70,4 @@ int close_window(t_vars *vars)
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 	exit(0);
-	// return (0);
 }

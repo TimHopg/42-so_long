@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 00:31:03 by thopgood          #+#    #+#             */
-/*   Updated: 2024/06/30 17:43:10 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:22:19 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
  * error codes. 1 = read success, 0 = EOF, -1 = error.
  */
 
-int get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 

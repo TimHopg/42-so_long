@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/08 17:16:36 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/11 10:35:19 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,12 @@ SRC 		= 	so_long.c \
 				map_parse.c \
 				map_validity.c \
 				flood_fill.c \
-				load_graphics.c \
+				load_gfx.c \
+				render_gfx.c \
 				move.c \
-				error.c
+				move2.c \
+				error.c \
+				free.c
 
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 

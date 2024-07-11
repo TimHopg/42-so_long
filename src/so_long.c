@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 20:17:29 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:43:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
  * Optimise by only rendering visible tiles.
  */
 
-
-
-int key_press(int keysym, t_vars *vars)
+int	key_press(int keysym, t_vars *vars)
 {
 	if (keysym == XK_Escape) // 65307 == esc linux
 		close_window(vars);
@@ -33,34 +31,36 @@ int key_press(int keysym, t_vars *vars)
 		move_right(vars);
 	if (vars->map->coin_count == 0)
 	{
-		put_img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x * TILE_SIZE) + 8, (vars->map->exit_y * TILE_SIZE) + 8);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+		put_img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x
+				* TILE_SIZE) + 8, (vars->map->exit_y * TILE_SIZE) + 8);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0,
+			0);
 		vars->map->coin_count -= 1;
 	}
-	if (vars->map->coin_count == -1
-		&& vars->map->p_x == vars->map->exit_x
+	if (vars->map->coin_count == -1 && vars->map->p_x == vars->map->exit_x
 		&& vars->map->p_y == vars->map->exit_y)
-		{
-			ft_printf("You Win!\n");
-			mlx_loop_end(vars->mlx);
-		}
+	{
+		ft_printf("You Win!\n");
+		mlx_loop_end(vars->mlx);
+	}
 	return (0);
 }
 
 /*
  * Parses fd if arguments are 1 and of .ber file extension.
  */
-int parse_fd(int ac, char **av)
+int	parse_fd(int ac, char **av)
 {
-	int fd;
-	int ber_len;
+	int	fd;
+	int	ber_len;
 
 	ber_len = ft_strlen(".ber");
 	if (ac == 1)
 		error_handling_import(ERR_NOMAP, NULL, NULL);
 	else if (ac > 2)
 		error_handling_import(ERR_ARGS, NULL, NULL);
-	else if (ft_strncmp(av[1] + ft_strlen(av[1]) - ber_len, ".ber", ber_len) != 0)
+	else if (ft_strncmp(av[1] + ft_strlen(av[1]) - ber_len, ".ber",
+			ber_len) != 0)
 		error_handling_import(ERR_FILETYPE, NULL, NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
@@ -68,19 +68,20 @@ int parse_fd(int ac, char **av)
 	return (fd);
 }
 
-void initialise_game(t_vars *vars)
+void	initialise_game(t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	if (vars->mlx == NULL)
 		error_handling_vars(ERR_MALLOC, vars);
-	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, "Thanks For All The Fish!");
+	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h
+			* TILE_SIZE, "Thanks For All The Fish!");
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
 	// vars->moves = 1;
 }
 
-void run_game(t_vars *vars)
+void	run_game(t_vars *vars)
 {
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
@@ -89,17 +90,18 @@ void run_game(t_vars *vars)
 
 /*
  TODO destroy display on linux machines? necessary?
- TODO use shell command to edit mlx library file that throws warning during compile
+ TODO use shell command to edit mlx library file that
+	TODO throws warning during compile
  TODO use keysym instead of keycode (X11/keysym.h)
  TODO silence write value warning on compile of mlx (cc/clang)
  TODO if graphics file is missing. handle!
  ! MEMORY map, textures, window, (display), mlx
  */
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int fd;
-	t_vars vars;
+	int		fd;
+	t_vars	vars;
 
 	ft_bzero(&vars, sizeof(t_vars));
 	fd = parse_fd(ac, av);

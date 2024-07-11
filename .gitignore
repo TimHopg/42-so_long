@@ -3,5 +3,6 @@
 *.o
 *.a
 so_long
+so_long_bonus
 .vscode
 mlx

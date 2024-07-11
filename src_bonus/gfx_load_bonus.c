@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gfx_load.c                                         :+:      :+:    :+:   */
+/*   gfx_load_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 13:11:59 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:59:49 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /*
  * Allows transparent pixels to be skipped.

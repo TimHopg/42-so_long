@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:41:57 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/08 20:18:53 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:17:59 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,20 @@ void move(t_vars *vars, int img, int x, int y)
     vars->map->p_y += y;
 }
 
+void turn(t_vars *vars, int img)
+{
+    if (vars->map->map[vars->map->p_y][vars->map->p_x] == 'E')
+        put_img_to_img(vars->xpm[BG], vars->xpm[CHESTC], vars->map->p_x * TILE_SIZE + 8, vars->map->p_y * TILE_SIZE + 8);
+    else
+        put_img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->map->p_x * TILE_SIZE, vars->map->p_y * TILE_SIZE);
+    put_img_to_img(vars->xpm[BG], vars->xpm[img], ((vars->map->p_x) * TILE_SIZE) + 8, ((vars->map->p_y) * TILE_SIZE) + 8);
+    mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+}
+
 void move_up(t_vars *vars)
 {
     if (vars->map->map[vars->map->p_y - 1][vars->map->p_x] == '1')
-        (void)0;
+        turn(vars, PB);
     else
     {
         ft_printf("Moves: %d\n", ++(vars->moves));
@@ -42,7 +52,7 @@ void move_up(t_vars *vars)
 void move_down(t_vars *vars)
 {
     if (vars->map->map[vars->map->p_y + 1][vars->map->p_x] == '1')
-        (void)0;
+        turn(vars, PF);
     else
     {
         ft_printf("Moves: %d\n", ++(vars->moves));
@@ -53,7 +63,7 @@ void move_down(t_vars *vars)
 void move_right(t_vars *vars)
 {
     if (vars->map->map[vars->map->p_y][vars->map->p_x + 1] == '1')
-        (void)0;
+        turn(vars, PR);
     else
     {
         ft_printf("Moves: %d\n", ++(vars->moves));
@@ -64,7 +74,7 @@ void move_right(t_vars *vars)
 void move_left(t_vars *vars)
 {
     if (vars->map->map[vars->map->p_y][vars->map->p_x - 1] == '1')
-        (void)0;
+        turn(vars, PL);
     else
     {
         ft_printf("Moves: %d\n", ++(vars->moves));

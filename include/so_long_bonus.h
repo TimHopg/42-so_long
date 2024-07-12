@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 13:36:14 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:04:19 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define ERR_EXITU "Exit unreachable\n"
 
 // Image macros
-# define XPM_MAX 12
+# define XPM_MAX 16
 # define BG 0
 # define XTRA_LINE 11
 # define FIELD 1
@@ -58,6 +58,10 @@
 # define CHESTC 5
 # define CHESTO 6
 # define TATA 10
+# define SP1 12
+# define SP2 13
+# define SP3 14
+# define SP4 15
 
 typedef struct s_img
 {
@@ -92,9 +96,10 @@ typedef struct s_vars
 	int				win_w;
 	int				win_h;
 	int				moves;
-	unsigned long	frame;
 	t_img			xpm[XPM_MAX];
 	t_map			*map;
+	unsigned long	frames;
+	int				chest_event;
 	unsigned long	loop;
 }					t_vars;
 
@@ -127,7 +132,14 @@ void				move_up(t_vars *vars);
 void				move_down(t_vars *vars);
 void				move_right(t_vars *vars);
 void				move_left(t_vars *vars);
+// Animation
+void				print_moves(t_vars *vars);
+void				 chest_animation(t_vars *vars);
 // Main
+void				run_game(t_vars *vars);
+void				initialise_game(t_vars *vars);
+int					key_press(int keysym, t_vars *vars);
+int					game_hook(void *param);
 int					main(int ac, char **av);
 
 /*

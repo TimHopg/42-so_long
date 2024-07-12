@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 13:56:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:58:04 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
 	vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
 	vars->xpm[TATA] = new_file_img("gfx/tatami.xpm", vars);
+	vars->xpm[SP1] = new_file_img("gfx/spark1.xpm", vars);
+	vars->xpm[SP2] = new_file_img("gfx/spark2.xpm", vars);
+	vars->xpm[SP3] = new_file_img("gfx/spark3.xpm", vars);
+	vars->xpm[SP4] = new_file_img("gfx/spark4.xpm", vars);
 	x = -1;
 	while (++x < XPM_MAX)
 		if (!(vars->xpm[x].img_ptr))
@@ -85,5 +89,6 @@ void	load_background(t_vars *vars)
 	render_map(vars);
 	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+	print_moves(vars);
 	render_text(vars);
 }

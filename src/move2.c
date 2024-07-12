@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:32:55 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 12:20:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:17:37 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	move(t_vars *vars, int img, int x, int y)
 	}
 	vars->map->p_x += x;
 	vars->map->p_y += y;
+	ft_printf("Moves: %d\n", ++(vars->moves));
 }
 
 /*

@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/11 22:47:32 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/12 17:57:13 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,14 @@ SRC 		= 	so_long.c \
 				free.c
 
 SRC_B 		= 	so_long_bonus.c \
+				game_bonus.c \
 				map_parse_bonus.c \
 				map_validity_bonus.c \
 				flood_fill_bonus.c \
 				gfx_load_bonus.c \
 				gfx_render_bonus.c \
 				gfx_render2_bonus.c \
+				sprite_animation_bonus.c \
 				move_bonus.c \
 				move2_bonus.c \
 				error_bonus.c \

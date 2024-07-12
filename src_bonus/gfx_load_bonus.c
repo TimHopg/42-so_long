@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 22:46:57 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:56:43 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	load_gfx(t_vars *vars)
 {
 	int x;
 
-	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, (vars->map->h + 1) * TILE_SIZE,
+	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, (vars->map->h) * TILE_SIZE,
 			vars);
+	vars->xpm[XTRA_LINE] = new_img(vars->map->w * TILE_SIZE, TILE_SIZE, vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
 	vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
 	vars->xpm[COIN] = new_file_img("gfx/coin.xpm", vars);

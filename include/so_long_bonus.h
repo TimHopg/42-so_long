@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 22:47:07 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:36:14 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define TILE_SIZE 32
 # define VALID_CHARS "01CEP"
+# define TEXT_H 11
+# define TEXT_COLOR 0x00022930
 
 // Error strings
 # define ERR_MALLOC "Malloc error\n"
@@ -43,8 +45,9 @@
 # define ERR_EXITU "Exit unreachable\n"
 
 // Image macros
-# define XPM_MAX 11
+# define XPM_MAX 12
 # define BG 0
+# define XTRA_LINE 11
 # define FIELD 1
 # define WALL 2
 # define COIN 3
@@ -89,10 +92,10 @@ typedef struct s_vars
 	int				win_w;
 	int				win_h;
 	int				moves;
-	// int game_state;
 	unsigned long	frame;
 	t_img			xpm[XPM_MAX];
 	t_map			*map;
+	unsigned long	loop;
 }					t_vars;
 
 // Free & error

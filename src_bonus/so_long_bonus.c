@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 22:55:58 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:02:08 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,49 @@ void	initialise_game(t_vars *vars)
 	load_background(vars);
 }
 
-// int hook_function(void *param)
-// {
-    
-//     data = (t_data *)param;
-//     // Now you can use data->mlx, data->win, etc.
-//     // Perform your loop operations here
-//     return (0);
-// }
+void print_moves(t_vars *vars)
+{
+	char *moves;
+
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[XTRA_LINE].img_ptr, 0, vars->map->h * TILE_SIZE);
+	mlx_string_put(vars->mlx, vars->win, 10, (vars->map->h + 1) * TILE_SIZE - TEXT_H, TEXT_COLOR, "Moves:");
+	moves = ft_itoa(vars->moves);
+	if (moves == NULL)
+		error_handling_all(ERR_MALLOC, vars);
+	mlx_string_put(vars->mlx, vars->win, 50, (vars->map->h + 1) * TILE_SIZE - TEXT_H, TEXT_COLOR, moves);
+	free(moves);
+}
+
+int game_hook(void *param)
+{
+	t_vars *vars;
+	vars = param;
+	print_moves(vars);
+	vars->loop++;
+    return (0);
+}
 
 /*
  * Initiates the hooks and loops necessary for the game to run.
  */
 void	run_game(t_vars *vars)
 {
-	// mlx_loop_hook(vars->mlx, )
-	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
 	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
+	mlx_loop_hook(vars->mlx, &game_hook, vars);
 	mlx_loop(vars->mlx);
 }
 
 /*
  ! text that says number of moves and remaining coins
+ ! INSTEAD OF IN SHELL
  ! sprite animation chest opening
  ! sprite animation character, idle and moving
  ! enemy + enemy animation
  ! You Win / You Died / Game Over screen
+ TODO render bottom line separately so score won't be covered
+ TODO render bottom line once at start with MOVES: 0
+ TODO only update bottom line when moves updates
  */
 
 /*

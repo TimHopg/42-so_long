@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 22:41:22 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:52:08 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	extra_line(t_vars *vars)
 {
-	int i;
+	int x;
 	
-	i = -1;
-	while (++i < vars->map->w)
-		put_img_to_img(vars->xpm[BG], vars->xpm[TATA], i * TILE_SIZE, ((vars->map->h) * TILE_SIZE));
+	x = -1;
+	while (++x < vars->map->w)
+		put_img_to_img(vars->xpm[XTRA_LINE], vars->xpm[TATA], x * TILE_SIZE, 0);
 }
 
 

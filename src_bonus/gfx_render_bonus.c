@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 13:52:08 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:48:39 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,13 @@ void	put_img_to_img(t_img dst, t_img src, int x, int y)
 		while (++j < src.h)
 			put_pixel_img(dst, x + i, y + j, get_pixel_img(src, i, j));
 	}
+}
+
+/*
+ * Allows transparent pixels to be skipped.
+ */
+unsigned int	get_pixel_img(t_img img, int x, int y)
+{
+	return (*(unsigned int *)((img.addr + (y * img.line_len) + (x * img.bpp
+				/ 8))));
 }

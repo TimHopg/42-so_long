@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 18:04:19 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:47:44 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define ERR_EXITU "Exit unreachable\n"
 
 // Image macros
-# define XPM_MAX 16
+# define XPM_MAX 24
 # define BG 0
 # define XTRA_LINE 11
 # define FIELD 1
@@ -62,6 +62,14 @@
 # define SP2 13
 # define SP3 14
 # define SP4 15
+# define BAD_I1 16
+# define BAD_I2 17
+# define BAD_I3 18
+# define BAD_I4 19
+# define BAD_I5 20
+# define BAD_I6 21
+# define BAD_L 22
+# define BAD_R 23
 
 typedef struct s_img
 {

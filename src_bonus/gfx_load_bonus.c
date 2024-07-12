@@ -6,20 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 16:58:04 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:54:51 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-/*
- * Allows transparent pixels to be skipped.
- */
-unsigned int	get_pixel_img(t_img img, int x, int y)
-{
-	return (*(unsigned int *)((img.addr + (y * img.line_len) + (x * img.bpp
-				/ 8))));
-}
 
 /*
  * Creates image for background.
@@ -55,8 +46,6 @@ t_img	new_file_img(char *path, t_vars *vars)
  */
 void	load_gfx(t_vars *vars)
 {
-	int x;
-
 	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, (vars->map->h) * TILE_SIZE,
 			vars);
 	vars->xpm[XTRA_LINE] = new_img(vars->map->w * TILE_SIZE, TILE_SIZE, vars);
@@ -74,6 +63,20 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[SP2] = new_file_img("gfx/spark2.xpm", vars);
 	vars->xpm[SP3] = new_file_img("gfx/spark3.xpm", vars);
 	vars->xpm[SP4] = new_file_img("gfx/spark4.xpm", vars);
+}
+
+void	load_gfx_enemy(t_vars *vars)
+{
+	int x;
+
+	vars->xpm[BAD_I1] = new_file_img("gfx/bad_i1.xpm", vars);
+	vars->xpm[BAD_I2] = new_file_img("gfx/bad_i2.xpm", vars);
+	vars->xpm[BAD_I3] = new_file_img("gfx/bad_i3.xpm", vars);
+	vars->xpm[BAD_I4] = new_file_img("gfx/bad_i4.xpm", vars);
+	vars->xpm[BAD_I5] = new_file_img("gfx/bad_i5.xpm", vars);
+	vars->xpm[BAD_I6] = new_file_img("gfx/bad_i6.xpm", vars);
+	vars->xpm[BAD_L] = new_file_img("gfx/bad_l.xpm", vars);
+	vars->xpm[BAD_R] = new_file_img("gfx/bad_r.xpm", vars);
 	x = -1;
 	while (++x < XPM_MAX)
 		if (!(vars->xpm[x].img_ptr))
@@ -86,6 +89,7 @@ void	load_gfx(t_vars *vars)
 void	load_background(t_vars *vars)
 {
 	load_gfx(vars);
+	load_gfx_enemy(vars);
 	render_map(vars);
 	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);

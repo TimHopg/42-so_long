@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 18:47:44 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:18:06 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define TILE_SIZE 32
-# define VALID_CHARS "01CEP"
+# define TSZ 32
+# define VALID_CHARS "01CEPB"
 # define TEXT_H 11
 # define TEXT_COLOR 0x00022930
 
@@ -45,7 +45,7 @@
 # define ERR_EXITU "Exit unreachable\n"
 
 // Image macros
-# define XPM_MAX 24
+# define XPM_MAX 23
 # define BG 0
 # define XTRA_LINE 11
 # define FIELD 1
@@ -67,9 +67,8 @@
 # define BAD_I3 18
 # define BAD_I4 19
 # define BAD_I5 20
-# define BAD_I6 21
-# define BAD_L 22
-# define BAD_R 23
+# define BAD_L 21
+# define BAD_R 22
 
 typedef struct s_img
 {
@@ -93,6 +92,8 @@ typedef struct s_map
 	int				p_count;
 	int				p_x;
 	int				p_y;
+	int				b_x;
+	int				b_y;
 	int				w;
 	int				h;
 }					t_map;
@@ -126,13 +127,14 @@ void				flood_fill(t_vars *vars);
 void				parse_map(int fd, t_vars *vars);
 // Gfx
 void				load_xpm(t_vars *vars);
-void				put_img_to_img(t_img dst, t_img src, int x, int y);
+void				img_to_img(t_img dst, t_img src, int x, int y);
 void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
 void				render_map(t_vars *vars);
 unsigned int		get_pixel_img(t_img img, int x, int y);
 void				extra_line(t_vars *vars);
 void				render_text(t_vars *vars);
+void				render_enemies(t_vars *vars);
 // Movement
 void				turn(t_vars *vars, int img);
 void				move(t_vars *vars, int img, int x, int y);

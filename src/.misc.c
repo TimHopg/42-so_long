@@ -2,7 +2,7 @@
 
 
 	// t_img img;
-	// img.img_ptr = mlx_new_image(vars->mlx, vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE);
+	// img.img_ptr = mlx_new_image(vars->mlx, vars->map->w * TSZ, vars->map->h * TSZ);
 	// img.addr = mlx_get_data_addr(img.img_ptr, &img.bpp, &img.line_len, &img.endian);
 	// make_bg(&img, vars);
 	// mlx_put_image_to_window(vars->mlx, vars->win, img.img_ptr, 0, 0);
@@ -15,7 +15,7 @@
 //     for (int y = 0; y < MAP_HEIGHT; y++) {
 //         for (int x = 0; x < MAP_WIDTH; x++) {
 //             int tile_type = map[y][x];
-//             mlx_put_image_to_window(mlx, win, tiles[tile_type], x * TILE_SIZE, y * TILE_SIZE);
+//             mlx_put_image_to_window(mlx, win, tiles[tile_type], x * TSZ, y * TSZ);
 //         }
 //     }
 // }
@@ -32,9 +32,9 @@
 //         while (x < vars->map->w)
 //         {
 //             if (vars->map->map[y][x] == '0')
-//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[FIELD], x * TILE_SIZE, y * TILE_SIZE);
+//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[FIELD], x * TSZ, y * TSZ);
 //             if (vars->map->map[y][x] == '1')
-//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[WALL], x * TILE_SIZE, y * TILE_SIZE);
+//                 mlx_put_image_to_window(vars->mlx, vars->win, vars->gfx[WALL], x * TSZ, y * TSZ);
 //             x++;
 //         }
 //         y++;
@@ -59,7 +59,7 @@
 // {
 //     int img_size;
 
-//     img_size = TILE_SIZE;
+//     img_size = TSZ;
 //     // create_bg(vars);
 //     // mlx_set_window_bg_img(vars->win, vars->bg, vars->map->w, vars->map->h);
 //     // mlx_put_image_to_window(vars->mlx, vars->mlx, vars->bg, vars->map->w, vars->map->h);
@@ -75,25 +75,25 @@
 //     t_img bg;
 //     t_img ring;
 
-//     base_image = new_img(vars->map->w * TILE_SIZE, vars->map->h * TILE_SIZE, vars);
+//     base_image = new_img(vars->map->w * TSZ, vars->map->h * TSZ, vars);
 //     {
 //         bg = new_file_img("gfx/field.xpm", vars);
 //         if (!bg.img_ptr)
 //             exit(2); // !
-//         put_img_to_img(base_image, bg, 0, 0);
+//         img_to_img(base_image, bg, 0, 0);
 //     }
 //     {
 //         ring = new_file_img("gfx/wall.xpm", vars);
 //         if (!ring.img_ptr)
 //             exit(2); // !
-//         put_img_to_img(base_image, ring, 0, 0);
+//         img_to_img(base_image, ring, 0, 0);
 //     }
 //     mlx_put_image_to_window(vars->mlx, vars->win, base_image.img_ptr, 0, 0);
 // }
 
 
 	// t_img img;
-	// img.img = mlx_new_image(vars.mlx, vars.map->w * TILE_SIZE, vars.map->h * TILE_SIZE);
+	// img.img = mlx_new_image(vars.mlx, vars.map->w * TSZ, vars.map->h * TSZ);
 	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	// make_bg(&img, &vars);
 	// mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
@@ -118,10 +118,10 @@
 // 	int y;
 
 //     y = 0;
-//     while (y < vars->map->h * TILE_SIZE)
+//     while (y < vars->map->h * TSZ)
 //     {
 //         x = 0;
-//         while (x < vars->map->w * TILE_SIZE)
+//         while (x < vars->map->w * TSZ)
 //         {
 // 			my_mlx_pixel_put(img, x, y, 0xFFFF0000);
 //             x++;

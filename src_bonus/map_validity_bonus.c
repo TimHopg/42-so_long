@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:31 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:58:16 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parse_line_chars(char *line, t_vars *vars, int h)
 }
 
 /*
- * Returns true if invalid char encountered !(0,1,E,P,C)
+ * Returns true if invalid char encountered !(0,1,E,P,C,B)
  */
 int	has_invalid_char(char *str, char *valids)
 {
@@ -99,7 +99,6 @@ int	is_map_valid(t_vars *vars)
 		error_handling_vars(ERR_EXIT, vars);
 	if (vars->map->coin_count < 1)
 		error_handling_vars(ERR_COLL, vars);
-	// print_map(vars);
 	check_map_perimeter(vars);
 	flood_fill(vars);
 	return (1);

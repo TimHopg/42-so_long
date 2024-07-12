@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 17:55:59 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 17:57:52 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	initialise_game(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (vars->mlx == NULL)
 		error_handling_vars(ERR_MALLOC, vars);
-	vars->win = mlx_new_window(vars->mlx, vars->map->w * TILE_SIZE, (vars->map->h + 1)
-			* TILE_SIZE, "Thanks For All The Fish!");
+	vars->win = mlx_new_window(vars->mlx, vars->map->w * TSZ, (vars->map->h + 1)
+			* TSZ, "Thanks For All The Fish!");
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
@@ -56,8 +56,8 @@ int	key_press(int keysym, t_vars *vars)
 		move_right(vars);
 	if (vars->map->coin_count == 0)
 	{
-		put_img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x
-				* TILE_SIZE) + 8, (vars->map->exit_y * TILE_SIZE) + 8);
+		img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x
+				* TSZ) + 8, (vars->map->exit_y * TSZ) + 8);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0,
 			0);
 	}

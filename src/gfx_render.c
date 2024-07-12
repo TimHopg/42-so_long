@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 13:03:59 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	render_map(t_vars *vars)
 		x = -1;
 		while (++x < vars->map->w)
 		{
-			put_img_to_img(vars->xpm[BG], vars->xpm[FIELD], x * TILE_SIZE, y
-				* TILE_SIZE);
+			img_to_img(vars->xpm[BG], vars->xpm[FIELD], x * TSZ, y
+				* TSZ);
 			if (vars->map->map[y][x] == '1')
-				put_img_to_img(vars->xpm[BG], vars->xpm[WALL], x * TILE_SIZE, y
-					* TILE_SIZE);
+				img_to_img(vars->xpm[BG], vars->xpm[WALL], x * TSZ, y
+					* TSZ);
 			if (vars->map->map[y][x] == 'P')
-				put_img_to_img(vars->xpm[BG], vars->xpm[PF], x * TILE_SIZE + 8,
-					y * TILE_SIZE + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[PF], x * TSZ + 8,
+					y * TSZ + 8);
 			if (vars->map->map[y][x] == 'C')
-				put_img_to_img(vars->xpm[BG], vars->xpm[COIN], x * TILE_SIZE
-					+ 8, y * TILE_SIZE + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[COIN], x * TSZ
+					+ 8, y * TSZ + 8);
 			if (vars->map->map[y][x] == 'E')
-				put_img_to_img(vars->xpm[BG], vars->xpm[CHESTC], x * TILE_SIZE
-					+ 8, y * TILE_SIZE + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[CHESTC], x * TSZ
+					+ 8, y * TSZ + 8);
 		}
 	}
 }
@@ -60,7 +60,7 @@ void	put_pixel_img(t_img img, int x, int y, int colour)
 /*
  * Copies one image to another by pixels.
  */
-void	put_img_to_img(t_img dst, t_img src, int x, int y)
+void	img_to_img(t_img dst, t_img src, int x, int y)
 {
 	int	i;
 	int	j;

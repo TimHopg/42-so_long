@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:41:57 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 14:18:09 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:58:42 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	move_up(t_vars *vars)
 	if (vars->map->map[vars->map->p_y - 1][vars->map->p_x] == '1')
 		turn(vars, PB);
 	else
-	{
-		// ++(vars->moves);
 		move(vars, PB, 0, -1);
-	}
 }
 
 void	move_down(t_vars *vars)
@@ -32,10 +29,7 @@ void	move_down(t_vars *vars)
 	if (vars->map->map[vars->map->p_y + 1][vars->map->p_x] == '1')
 		turn(vars, PF);
 	else
-	{
-		// ++(vars->moves);
 		move(vars, PF, 0, 1);
-	}
 }
 
 void	move_right(t_vars *vars)
@@ -43,10 +37,7 @@ void	move_right(t_vars *vars)
 	if (vars->map->map[vars->map->p_y][vars->map->p_x + 1] == '1')
 		turn(vars, PR);
 	else
-	{
-		// ++(vars->moves);
 		move(vars, PR, 1, 0);
-	}
 }
 
 void	move_left(t_vars *vars)
@@ -54,8 +45,5 @@ void	move_left(t_vars *vars)
 	if (vars->map->map[vars->map->p_y][vars->map->p_x - 1] == '1')
 		turn(vars, PL);
 	else
-	{
-		// ++(vars->moves);
 		move(vars, PL, -1, 0);
-	}
 }

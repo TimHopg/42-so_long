@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 15:35:52 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define TILE_SIZE 32
+# define TSZ 32
 # define VALID_CHARS "01CEP"
 
 // Error strings
@@ -107,7 +107,7 @@ void				flood_fill(t_vars *vars);
 void				parse_map(int fd, t_vars *vars);
 // Gfx
 void				load_xpm(t_vars *vars);
-void				put_img_to_img(t_img dst, t_img src, int x, int y);
+void				img_to_img(t_img dst, t_img src, int x, int y);
 void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
 void				render_map(t_vars *vars);

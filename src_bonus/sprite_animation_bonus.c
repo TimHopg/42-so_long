@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 18:08:11 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void exit_to_window(t_vars *vars, int dst, int src)
 {
-	put_img_to_img(vars->xpm[dst], vars->xpm[FIELD], vars->map->exit_x * TILE_SIZE, vars->map->exit_y * TILE_SIZE);
-	put_img_to_img(vars->xpm[dst], vars->xpm[CHESTO], vars->map->exit_x * TILE_SIZE + 8, vars->map->exit_y * TILE_SIZE + 8);
-	put_img_to_img(vars->xpm[dst], vars->xpm[src], vars->map->exit_x * TILE_SIZE, vars->map->exit_y * TILE_SIZE);
+	img_to_img(vars->xpm[dst], vars->xpm[FIELD], vars->map->exit_x * TSZ, vars->map->exit_y * TSZ);
+	img_to_img(vars->xpm[dst], vars->xpm[CHESTO], vars->map->exit_x * TSZ + 8, vars->map->exit_y * TSZ + 8);
+	img_to_img(vars->xpm[dst], vars->xpm[src], vars->map->exit_x * TSZ, vars->map->exit_y * TSZ);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[dst].img_ptr, 0, 0);
 }
 
@@ -37,8 +37,8 @@ void chest_animation(t_vars *vars)
 		exit_to_window(vars, BG, SP1);
 	if (vars->loop == vars->frames + 2500 && vars->chest_event)
 	{
-		put_img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->map->exit_x * TILE_SIZE, vars->map->exit_y * TILE_SIZE);
-		put_img_to_img(vars->xpm[BG], vars->xpm[CHESTO], vars->map->exit_x * TILE_SIZE + 8, vars->map->exit_y * TILE_SIZE + 8);
+		img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->map->exit_x * TSZ, vars->map->exit_y * TSZ);
+		img_to_img(vars->xpm[BG], vars->xpm[CHESTO], vars->map->exit_x * TSZ + 8, vars->map->exit_y * TSZ + 8);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 	}
 }
@@ -47,11 +47,11 @@ void print_moves(t_vars *vars)
 {
 	char *moves_str;
 
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[XTRA_LINE].img_ptr, 0, vars->map->h * TILE_SIZE);
-	mlx_string_put(vars->mlx, vars->win, 10, (vars->map->h + 1) * TILE_SIZE - TEXT_H, TEXT_COLOR, "Moves:");
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[XTRA_LINE].img_ptr, 0, vars->map->h * TSZ);
+	mlx_string_put(vars->mlx, vars->win, 10, (vars->map->h + 1) * TSZ - TEXT_H, TEXT_COLOR, "Moves:");
 	moves_str = ft_itoa(vars->moves);
 	if (moves_str == NULL)
 		error_handling_all(ERR_MALLOC, vars);
-	mlx_string_put(vars->mlx, vars->win, 50, (vars->map->h + 1) * TILE_SIZE - TEXT_H, TEXT_COLOR, moves_str);
+	mlx_string_put(vars->mlx, vars->win, 50, (vars->map->h + 1) * TSZ - TEXT_H, TEXT_COLOR, moves_str);
 	free(moves_str);
 }

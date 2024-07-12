@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 18:46:46 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:28:07 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ int	parse_fd(int ac, char **av)
 	return (fd);
 }
 
+void idle_zombie(t_vars *vars)
+{
+	
+}
+
 int game_hook(void *param)
 {
 	t_vars *vars;
 	vars = (t_vars *)param;
 	chest_animation(vars);
+	idle_zombie(vars);
 	vars->loop++;
     return (0);
 }
@@ -56,6 +62,7 @@ int	main(int ac, char **av)
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 	initialise_game(&vars);
+	// ft_printf("check\n");
 	run_game(&vars);
 	close_window(&vars);
 	return (0);
@@ -71,4 +78,5 @@ int	main(int ac, char **av)
  TODO only update bottom line when moves updates
  TODO MOVES as graphic and number too. Re-render only number tiles
  ! why so many mallocs on mlx_loop_hook
+ TODO map bad if more than one enemy
  */

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 18:54:51 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:20:28 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_img	new_file_img(char *path, t_vars *vars)
  */
 void	load_gfx(t_vars *vars)
 {
-	vars->xpm[BG] = new_img(vars->map->w * TILE_SIZE, (vars->map->h) * TILE_SIZE,
+	vars->xpm[BG] = new_img(vars->map->w * TSZ, (vars->map->h) * TSZ,
 			vars);
-	vars->xpm[XTRA_LINE] = new_img(vars->map->w * TILE_SIZE, TILE_SIZE, vars);
+	vars->xpm[XTRA_LINE] = new_img(vars->map->w * TSZ, TSZ, vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
 	vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
 	vars->xpm[COIN] = new_file_img("gfx/coin.xpm", vars);
@@ -68,13 +68,11 @@ void	load_gfx(t_vars *vars)
 void	load_gfx_enemy(t_vars *vars)
 {
 	int x;
-
 	vars->xpm[BAD_I1] = new_file_img("gfx/bad_i1.xpm", vars);
 	vars->xpm[BAD_I2] = new_file_img("gfx/bad_i2.xpm", vars);
 	vars->xpm[BAD_I3] = new_file_img("gfx/bad_i3.xpm", vars);
 	vars->xpm[BAD_I4] = new_file_img("gfx/bad_i4.xpm", vars);
 	vars->xpm[BAD_I5] = new_file_img("gfx/bad_i5.xpm", vars);
-	vars->xpm[BAD_I6] = new_file_img("gfx/bad_i6.xpm", vars);
 	vars->xpm[BAD_L] = new_file_img("gfx/bad_l.xpm", vars);
 	vars->xpm[BAD_R] = new_file_img("gfx/bad_r.xpm", vars);
 	x = -1;
@@ -91,6 +89,7 @@ void	load_background(t_vars *vars)
 	load_gfx(vars);
 	load_gfx_enemy(vars);
 	render_map(vars);
+	render_enemies(vars);
 	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 	print_moves(vars);

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 21:18:06 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:21:50 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 
 # define TSZ 32
 # define VALID_CHARS "01CEPB"
@@ -43,6 +44,12 @@
 # define ERR_GNL "Get next line error\n"
 # define ERR_COIN "Some coins unreachable\n"
 # define ERR_EXITU "Exit unreachable\n"
+
+// Moves
+# define UP 0
+# define DOWN 1
+# define LEFT 2
+# define RIGHT 3
 
 // Image macros
 # define XPM_MAX 23
@@ -69,6 +76,8 @@
 # define BAD_I5 20
 # define BAD_L 21
 # define BAD_R 22
+
+# define ZOM_SPEED 120000
 
 typedef struct s_img
 {
@@ -109,6 +118,7 @@ typedef struct s_vars
 	t_map			*map;
 	unsigned long	frames;
 	int				chest_event;
+	int				slash;
 	unsigned long	loop;
 }					t_vars;
 
@@ -144,7 +154,9 @@ void				move_right(t_vars *vars);
 void				move_left(t_vars *vars);
 // Animation
 void				print_moves(t_vars *vars);
-void				 chest_animation(t_vars *vars);
+void				chest_animation(t_vars *vars);
+void				idle_zombie(t_vars *vars);
+void				moves_possible(t_vars *vars);
 // Main
 void				run_game(t_vars *vars);
 void				initialise_game(t_vars *vars);

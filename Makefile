@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/12 17:57:13 by thopgood         ###   ########.fr        #
+#    Updated: 2024/07/12 23:31:16 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC_B 		= 	so_long_bonus.c \
 				gfx_render_bonus.c \
 				gfx_render2_bonus.c \
 				sprite_animation_bonus.c \
+				sprite_animation2_bonus.c \
 				move_bonus.c \
 				move2_bonus.c \
 				error_bonus.c \

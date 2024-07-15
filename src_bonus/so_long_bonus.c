@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 21:28:07 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:30:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ int	parse_fd(int ac, char **av)
 	return (fd);
 }
 
-void idle_zombie(t_vars *vars)
-{
-	
-}
-
 int game_hook(void *param)
 {
 	t_vars *vars;
@@ -62,7 +57,7 @@ int	main(int ac, char **av)
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 	initialise_game(&vars);
-	// ft_printf("check\n");
+	moves_possible(&vars);
 	run_game(&vars);
 	close_window(&vars);
 	return (0);

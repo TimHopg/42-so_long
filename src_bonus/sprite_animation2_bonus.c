@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/15 15:46:28 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:41:13 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void random_move(int *moves, int len)
     while (++i < len)
         options += moves[i];
     srand(time(0));
-    enemy_move(rand() % options);
-    return (-1);
+    // enemy_move(rand() % options);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/15 15:21:50 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 01:07:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define DOWN 1
 # define LEFT 2
 # define RIGHT 3
+# define NO_MOVE 4
 
 // Image macros
 # define XPM_MAX 23
@@ -77,7 +78,13 @@
 # define BAD_L 21
 # define BAD_R 22
 
-# define ZOM_SPEED 120000
+# define ZOM_SPEED 80000
+
+typedef struct s_tab
+{
+	int x;
+	int y;
+} t_tab;
 
 typedef struct s_img
 {
@@ -111,6 +118,7 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
+	t_tab			b;
 	int				win_w;
 	int				win_h;
 	int				moves;

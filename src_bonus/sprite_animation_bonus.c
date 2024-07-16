@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/13 00:18:14 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 01:16:45 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,30 @@ void chest_animation(t_vars *vars)
 
 void zombie_to_window(t_vars *vars, int zom_img)
 {
-	img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->map->b_x * TSZ, vars->map->b_y * TSZ);
-	img_to_img(vars->xpm[BG], vars->xpm[zom_img], vars->map->b_x * TSZ, vars->map->b_y * TSZ);
+	img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->b.x * TSZ, vars->b.y * TSZ);
+	img_to_img(vars->xpm[BG], vars->xpm[zom_img], vars->b.x * TSZ, vars->b.y * TSZ);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 }
 
 void idle_zombie(t_vars *vars)
 {
-	if (vars->loop % ZOM_SPEED == 0)
+	if ((double)(vars->loop % ZOM_SPEED) == (int)ZOM_SPEED / 1.33 /* || vars->loop % ZOM_SPEED == ZOM_SPEED / 1 */)
 	{
-		zombie_to_window(vars, BAD_L);
+		moves_possible(vars);
 		vars->slash = 1;
 	}
-	if (vars->loop % ZOM_SPEED == 20000 || vars->loop % ZOM_SPEED == 80000)
+	if (vars->loop % ZOM_SPEED == ZOM_SPEED / 2 || vars->loop % ZOM_SPEED == 0) // 0 40k
 		vars->slash = 0;
-	if (vars->loop % (ZOM_SPEED / 8) == 0 && vars->slash == 0)
+	if (vars->loop % (ZOM_SPEED / 8) == 0 && vars->slash == 0) // 0
 		zombie_to_window(vars, BAD_I1);
-	if (vars->loop % (ZOM_SPEED / 8) == 3000 && vars->slash == 0)
+	if (vars->loop % (ZOM_SPEED / 8) == ZOM_SPEED / 20 && vars->slash == 0) // 2k
 		zombie_to_window(vars, BAD_I2);
-	if (vars->loop % (ZOM_SPEED / 8) == 6000 && vars->slash == 0)
+	if (vars->loop % (ZOM_SPEED / 8) == ZOM_SPEED / 10 && vars->slash == 0) // 4k
 		zombie_to_window(vars, BAD_I3);
-	if (vars->loop % (ZOM_SPEED / 8) == 9000 && vars->slash == 0)
+	if (vars->loop % (ZOM_SPEED / 8) == ZOM_SPEED / 6 && vars->slash == 0) // 6k
 		zombie_to_window(vars, BAD_I4);
-	if (vars->loop % (ZOM_SPEED / 8) == 12000 && vars->slash == 0)
+	if (vars->loop % (ZOM_SPEED / 8) == ZOM_SPEED / 5 && vars->slash == 0) // 8k
 		zombie_to_window(vars, BAD_I5);
-	if (vars->loop % ZOM_SPEED == 60000)
-	{
-		zombie_to_window(vars, BAD_R);
-		vars->slash = 1;
-	}
 }
 
 void print_moves(t_vars *vars)

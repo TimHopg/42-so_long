@@ -6,11 +6,20 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/13 17:30:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 00:10:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void lose_check(t_vars *vars)
+{
+    if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
+    {
+        ft_printf("GAME OVER\nYou Lose!\n");
+        close_window(vars);
+    }
+}
 
 /*
  * Parses fd if arguments are 1 and of .ber file extension.
@@ -40,6 +49,7 @@ int game_hook(void *param)
 	vars = (t_vars *)param;
 	chest_animation(vars);
 	idle_zombie(vars);
+	lose_check(vars);
 	vars->loop++;
     return (0);
 }

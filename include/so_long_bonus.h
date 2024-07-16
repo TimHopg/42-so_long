@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 01:07:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:58:04 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <time.h>
 
 # define TSZ 32
+# define FSZ 18
 # define VALID_CHARS "01CEPB"
 # define TEXT_H 11
 # define TEXT_COLOR 0x00022930
@@ -44,6 +45,7 @@
 # define ERR_GNL "Get next line error\n"
 # define ERR_COIN "Some coins unreachable\n"
 # define ERR_EXITU "Exit unreachable\n"
+# define ERR_ENEMY "Too many/no enemies\n"
 
 // Moves
 # define UP 0
@@ -77,8 +79,19 @@
 # define BAD_I5 20
 # define BAD_L 21
 # define BAD_R 22
+# define MOVES 23
+# define ZERO 24
+# define ONE 25
+# define TWO 26
+# define THREE 27
+# define FOUR 28
+# define FIVE 29
+# define SIX 30
+# define SEVEN 31
+# define EIGHT 32
+# define NINE 33
 
-# define ZOM_SPEED 80000
+# define ZOM_SPEED 40000
 
 typedef struct s_tab
 {
@@ -178,6 +191,7 @@ int					main(int ac, char **av);
  * C = collectible
  * E = map exit
  * P = player starting position
+ * B = bad guy starting position
  */
 
 #endif

@@ -6,12 +6,15 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 00:10:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:49:41 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+/*
+ * Checks if enemy and player occupy same position on map and quits game
+ */
 void lose_check(t_vars *vars)
 {
     if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
@@ -43,6 +46,9 @@ int	parse_fd(int ac, char **av)
 	return (fd);
 }
 
+/*
+ * Function hooks into game loop that runs every frame of the game.
+ */
 int game_hook(void *param)
 {
 	t_vars *vars;
@@ -74,14 +80,10 @@ int	main(int ac, char **av)
 }
 
 /*
- ! sprite animation chest opening
- ! sprite animation character, idle and moving
- ! enemy + enemy animation
- ! You Win / You Died / Game Over screen
- TODO render bottom line separately so score won't be covered
- TODO render bottom line once at start with MOVES: 0
- TODO only update bottom line when moves updates
+ * mlx_loop_hook mallocs and frees on every frame resulting in a large
+	* number of mallocs and frees
+ TODO You Win / You Died / Game Over screen
  TODO MOVES as graphic and number too. Re-render only number tiles
- ! why so many mallocs on mlx_loop_hook
- TODO map bad if more than one enemy
+ * game state variable that updates when game is over. Can stop animations
+	* and counters once game is over
  */

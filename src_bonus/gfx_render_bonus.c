@@ -6,12 +6,15 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 20:15:40 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:19:56 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+/*
+ * Renders extra line at bottom of map to display score.
+ */
 void	extra_line(t_vars *vars)
 {
 	int x;
@@ -21,6 +24,9 @@ void	extra_line(t_vars *vars)
 		img_to_img(vars->xpm[XTRA_LINE], vars->xpm[TATA], x * TSZ, 0);
 }
 
+/*
+ * Renders map based on map file icons.
+ */
 void	render_map(t_vars *vars)
 {
 	int	x;

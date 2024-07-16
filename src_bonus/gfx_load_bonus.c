@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 21:20:28 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:17:56 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_img	new_file_img(char *path, t_vars *vars)
 
 /*
  * Loads background 'BG' image of window size. Loads each XPM file into struct.
- * Checks for malloc errors and handles appropriately.
  */
 void	load_gfx(t_vars *vars)
 {
@@ -65,6 +64,10 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[SP4] = new_file_img("gfx/spark4.xpm", vars);
 }
 
+/*
+ * Loads enemy graphics files.
+ * Checks for malloc errors on all images and handles appropriately.
+ */
 void	load_gfx_enemy(t_vars *vars)
 {
 	int x;

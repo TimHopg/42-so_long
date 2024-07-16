@@ -6,12 +6,15 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 00:01:20 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:31:56 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+/*
+ * Updates map co-ordinates where player/enemy has been.
+ */
 void update_coords(t_vars *vars, t_tab *tab, t_tab moves)
 {
     if (vars->map->map[tab->y][tab->x] == 'E')
@@ -22,6 +25,9 @@ void update_coords(t_vars *vars, t_tab *tab, t_tab moves)
 	tab->y += moves.y;
 }
 
+/*
+ * Moves enemy and updates image.
+ */
 void	enemy_move(t_vars *vars, int img, t_tab moves, t_tab *tab)
 {
 	img_to_img(vars->xpm[BG], vars->xpm[FIELD], tab->x * TSZ,
@@ -30,13 +36,11 @@ void	enemy_move(t_vars *vars, int img, t_tab moves, t_tab *tab)
 			* TSZ), ((tab->y + moves.y) * TSZ));
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 	update_coords(vars, tab, moves);
-    ft_printf("(%d,%d) (x,y)\n", tab->x, tab->y);
-    for(int i = 0; i < vars->map->h; i++)
-    {
-        ft_printf("%s\n", vars->map->map[i]);
-    }
 }
 
+/*
+ * sends the appropriate move coordinates to the enemy_move function.
+ */
 void move_select(t_vars *vars, t_tab *tab, int dir)
 {
 	t_tab moves;
@@ -65,6 +69,12 @@ void move_select(t_vars *vars, t_tab *tab, int dir)
 	enemy_move(vars, BAD_R, moves, tab);
 }
 
+/*
+ * Determines how many possible moves are available to the enemy, if none, 
+ * attack animation takes place and no movement. Else, a random one of the
+ * possible moves is chosen using rand() and time(0) as the seed so each
+ * game is unique. 
+ */
 void random_move(t_vars *vars, int *moves, int len)
 {
     int i;
@@ -78,43 +88,21 @@ void random_move(t_vars *vars, int *moves, int len)
     if (options == 0)
         return (move_select(vars, &(vars->b), NO_MOVE));
     srand(time(0));
-    i = 0;
+    i = -1;
     choice_index = rand() % options;
-    while (i < len)
-    {
+    while (++i < len)
         if (moves[i])
         {
             if (choice_index == 0)
                 return (move_select(vars, &(vars->b), i));
             choice_index -= 1;
         }
-        i++;
-    }
-    
 }
 
 /*
  * Zombies can only move to empty tiles or where the player is standing.
  * Builds array of possible moves [U,D,L,R].
  */
-void moves_possible1(t_vars *vars)
-{
-    int truths[4];
-    int len;
-
-    ft_bzero(truths, sizeof(truths));
-    if (ft_strchr("0P", vars->map->map[vars->map->b_y - 1][vars->map->b_x]))
-        truths[0] = 1;
-    if (ft_strchr("0P", vars->map->map[vars->map->b_y + 1][vars->map->b_x]))
-        truths[1] = 1;
-    if (ft_strchr("0P", vars->map->map[vars->map->b_y][vars->map->b_x - 1]))
-        truths[2] = 1;
-    if (ft_strchr("0P", vars->map->map[vars->map->b_y][vars->map->b_x + 1]))
-        truths[3] = 1;
-    len = sizeof(truths) / sizeof(truths[0]);
-    random_move(vars, truths, len);
-}
-
 void moves_possible(t_vars *vars)
 {
     int truths[4];

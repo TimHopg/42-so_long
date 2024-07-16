@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 17:55:59 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:40:48 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	initialise_game(t_vars *vars)
 	if (vars->mlx == NULL)
 		error_handling_vars(ERR_MALLOC, vars);
 	vars->win = mlx_new_window(vars->mlx, vars->map->w * TSZ, (vars->map->h + 1)
-			* TSZ, "Thanks For All The Fish!");
+			* TSZ, "...and thanks for all the fish!");
 	if (vars->win == NULL)
 		error_handling_all(ERR_MALLOC, vars);
 	load_background(vars);
@@ -46,13 +46,13 @@ int	key_press(int keysym, t_vars *vars)
 {
 	if (keysym == XK_Escape)
 		close_window(vars);
-	if (keysym == XK_w)
+	if (keysym == XK_w && vars->g_over == 0)
 		move_up(vars);
-	if (keysym == XK_a)
+	if (keysym == XK_a && vars->g_over == 0)
 		move_left(vars);
-	if (keysym == XK_s)
+	if (keysym == XK_s && vars->g_over == 0)
 		move_down(vars);
-	if (keysym == XK_d)
+	if (keysym == XK_d && vars->g_over == 0)
 		move_right(vars);
 	if (vars->map->coin_count == 0)
 	{
@@ -64,8 +64,8 @@ int	key_press(int keysym, t_vars *vars)
 	if (vars->map->coin_count == -1 && vars->map->p_x == vars->map->exit_x
 		&& vars->map->p_y == vars->map->exit_y)
 	{
-		ft_printf("You Win!\n");
-		mlx_loop_end(vars->mlx);
+		vars->g_over = 1;
+		img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
 	}
 	return (0);
 }

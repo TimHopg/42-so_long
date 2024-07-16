@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 16:01:48 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:46:10 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[SP2] = new_file_img("gfx/spark2.xpm", vars);
 	vars->xpm[SP3] = new_file_img("gfx/spark3.xpm", vars);
 	vars->xpm[SP4] = new_file_img("gfx/spark4.xpm", vars);
+	vars->xpm[LOSE] = new_file_img("gfx/lose.xpm", vars);
+	vars->xpm[WIN] = new_file_img("gfx/win.xpm", vars);
 }
 
 /*

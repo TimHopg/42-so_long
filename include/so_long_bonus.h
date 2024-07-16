@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 16:04:38 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:13:10 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define NO_MOVE 4
 
 // Image macros
-# define XPM_MAX 23
+# define XPM_MAX 25
 # define BG 0
 # define XTRA_LINE 11
 # define FIELD 1
@@ -79,6 +79,8 @@
 # define BAD_I5 20
 # define BAD_L 21
 # define BAD_R 22
+# define LOSE 23
+# define WIN 24
 // Fonts
 # define FONT_MAX 11
 # define MOVES 10
@@ -133,10 +135,11 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
-	t_tab			b;
 	int				win_w;
 	int				win_h;
 	int				moves;
+	int				g_over;
+	t_tab			b;
 	t_img			xpm[XPM_MAX];
 	t_img			font[FONT_MAX];
 	t_map			*map;

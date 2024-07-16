@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 14:11:27 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:30:18 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void lose_check(t_vars *vars)
 {
     if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
     {
-        ft_printf("GAME OVER\nYou Lose!\n");
-        close_window(vars);
+		vars->g_over = 1;
+		img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
     }
 }
 
@@ -53,11 +54,14 @@ int game_hook(void *param)
 {
 	t_vars *vars;
 	vars = (t_vars *)param;
-	chest_animation(vars);
-	idle_zombie(vars);
-	lose_check(vars);
-	vars->loop++;
-    return (0);
+	if (vars->g_over == 0)
+	{
+		chest_animation(vars);
+		idle_zombie(vars);
+		lose_check(vars);
+		vars->loop++;
+	}
+	return (0);
 }
 
 /*
@@ -73,7 +77,6 @@ int	main(int ac, char **av)
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 	initialise_game(&vars);
-	// moves_possible(&vars);
 	run_game(&vars);
 	close_window(&vars);
 	return (0);
@@ -87,3 +90,6 @@ int	main(int ac, char **av)
  * game state variable that updates when game is over. Can stop animations
 	* and counters once game is over
  */
+
+// img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
+// img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);

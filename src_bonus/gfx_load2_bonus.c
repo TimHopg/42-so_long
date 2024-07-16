@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 16:01:51 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:21:18 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void	load_gfx_font(t_vars *vars)
 {
-	int x;
+	int	x;
 
 	vars->font[MOVES] = new_file_img("gfx/moves.xpm", vars);
 	vars->font[ZERO] = new_file_img("gfx/zero.xpm", vars);

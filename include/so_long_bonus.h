@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 17:13:10 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:19:09 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@
 
 typedef struct s_tab
 {
-	int x;
-	int y;
-} t_tab;
+	int				x;
+	int				y;
+}					t_tab;
 
 typedef struct s_img
 {

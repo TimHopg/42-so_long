@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 17:55:59 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 17:59:01 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:21:22 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	run_game(t_vars *vars)
 	mlx_loop(vars->mlx);
 }
 
-/* 
+/*
  * Initialises mlx, window and loads background image
  */
 void	initialise_game(t_vars *vars)
@@ -56,8 +56,8 @@ int	key_press(int keysym, t_vars *vars)
 		move_right(vars);
 	if (vars->map->coin_count == 0)
 	{
-		img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x
-				* TSZ) + 8, (vars->map->exit_y * TSZ) + 8);
+		img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x * TSZ)
+			+ 8, (vars->map->exit_y * TSZ) + 8);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0,
 			0);
 	}
@@ -65,7 +65,8 @@ int	key_press(int keysym, t_vars *vars)
 		&& vars->map->p_y == vars->map->exit_y)
 	{
 		vars->g_over = 1;
-		img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
+		img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53,
+			(vars->map->h * TSZ) / 2 - 10);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 12:45:20 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:20:53 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,16 @@ void	parse_map(int fd, t_vars *vars)
 
 /*
  * Map errors:
- 	* non rectangular (lines different length)
- 	* bad chars
- 	* flood fill fail
- 	* less or more than 1 exit
- 	* less or more than 1 starting position
- 	* less than one collectible
- 	* file permissions
- 	* wall not around perimeter
- 	* empty map
- 	* map of new lines
- 	* map must be of type .ber
-	* too many enemies
+ * non rectangular (lines different length)
+ * bad chars
+ * flood fill fail
+ * less or more than 1 exit
+ * less or more than 1 starting position
+ * less than one collectible
+ * file permissions
+ * wall not around perimeter
+ * empty map
+ * map of new lines
+ * map must be of type .ber
+ * too many enemies
  */

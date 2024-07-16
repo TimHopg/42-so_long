@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 17:30:18 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:22:13 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 /*
  * Checks if enemy and player occupy same position on map and quits game
  */
-void lose_check(t_vars *vars)
+void	lose_check(t_vars *vars)
 {
-    if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
-    {
+	if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
+	{
 		vars->g_over = 1;
-		img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
-    }
+		img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2
+			- 53, (vars->map->h * TSZ) / 2 - 10);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0,
+			0);
+	}
 }
 
 /*
@@ -50,9 +52,10 @@ int	parse_fd(int ac, char **av)
 /*
  * Function hooks into game loop that runs every frame of the game.
  */
-int game_hook(void *param)
+int	game_hook(void *param)
 {
-	t_vars *vars;
+	t_vars	*vars;
+
 	vars = (t_vars *)param;
 	if (vars->g_over == 0)
 	{
@@ -91,5 +94,7 @@ int	main(int ac, char **av)
 	* and counters once game is over
  */
 
-// img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
-// img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53, (vars->map->h * TSZ) / 2 - 10);
+// img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53,
+	// (vars->map->h * TSZ) / 2 - 10);
+// img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53,
+	// (vars->map->h * TSZ) / 2 - 10);

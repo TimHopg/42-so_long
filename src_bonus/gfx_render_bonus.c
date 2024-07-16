@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 16:09:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:23:48 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 void	extra_line(t_vars *vars)
 {
-	int x;
-	
+	int	x;
+
 	x = -1;
 	while (++x < vars->map->w)
 		img_to_img(vars->xpm[XTRA_LINE], vars->xpm[TATA], x * TSZ, 0);
@@ -43,14 +43,14 @@ void	render_map(t_vars *vars)
 			if (vars->map->map[y][x] == '1')
 				img_to_img(vars->xpm[BG], vars->xpm[WALL], x * TSZ, y * TSZ);
 			if (vars->map->map[y][x] == 'P')
-				img_to_img(vars->xpm[BG], vars->xpm[PF], x * TSZ + 8,
-					y * TSZ + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[PF], x * TSZ + 8, y * TSZ
+					+ 8);
 			if (vars->map->map[y][x] == 'C')
-				img_to_img(vars->xpm[BG], vars->xpm[COIN], x * TSZ
-					+ 8, y * TSZ + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[COIN], x * TSZ + 8, y * TSZ
+					+ 8);
 			if (vars->map->map[y][x] == 'E')
-				img_to_img(vars->xpm[BG], vars->xpm[CHESTC], x * TSZ
-					+ 8, y * TSZ + 8);
+				img_to_img(vars->xpm[BG], vars->xpm[CHESTC], x * TSZ + 8, y
+					* TSZ + 8);
 		}
 	}
 }

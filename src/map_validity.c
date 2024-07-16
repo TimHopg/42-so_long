@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/11 12:45:44 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:29:10 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	is_map_valid(t_vars *vars)
 		error_handling_vars(ERR_EXIT, vars);
 	if (vars->map->coin_count < 1)
 		error_handling_vars(ERR_COLL, vars);
-	// print_map(vars);
 	check_map_perimeter(vars);
 	flood_fill(vars);
 	return (1);

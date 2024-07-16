@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 12:17:56 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:01:48 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	load_gfx(t_vars *vars)
 void	load_gfx_enemy(t_vars *vars)
 {
 	int x;
+
 	vars->xpm[BAD_I1] = new_file_img("gfx/bad_i1.xpm", vars);
 	vars->xpm[BAD_I2] = new_file_img("gfx/bad_i2.xpm", vars);
 	vars->xpm[BAD_I3] = new_file_img("gfx/bad_i3.xpm", vars);
@@ -90,11 +91,12 @@ void	load_gfx_enemy(t_vars *vars)
 void	load_background(t_vars *vars)
 {
 	load_gfx(vars);
+	load_gfx_font(vars);
 	load_gfx_enemy(vars);
 	render_map(vars);
 	render_enemies(vars);
 	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
 	print_moves(vars);
-	render_text(vars);
+	// render_text(vars);
 }

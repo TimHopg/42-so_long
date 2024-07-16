@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 12:19:56 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:09:43 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	extra_line(t_vars *vars)
 	x = -1;
 	while (++x < vars->map->w)
 		img_to_img(vars->xpm[XTRA_LINE], vars->xpm[TATA], x * TSZ, 0);
+	img_to_img(vars->xpm[XTRA_LINE], vars->font[MOVES], FSZ / 2, FSZ);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 13:58:04 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:04:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <time.h>
 
 # define TSZ 32
-# define FSZ 18
+# define FSZ 10
 # define VALID_CHARS "01CEPB"
 # define TEXT_H 11
 # define TEXT_COLOR 0x00022930
@@ -79,17 +79,19 @@
 # define BAD_I5 20
 # define BAD_L 21
 # define BAD_R 22
-# define MOVES 23
-# define ZERO 24
-# define ONE 25
-# define TWO 26
-# define THREE 27
-# define FOUR 28
-# define FIVE 29
-# define SIX 30
-# define SEVEN 31
-# define EIGHT 32
-# define NINE 33
+// Fonts
+# define FONT_MAX 11
+# define MOVES 10
+# define ZERO 0
+# define ONE 1
+# define TWO 2
+# define THREE 3
+# define FOUR 4
+# define FIVE 5
+# define SIX 6
+# define SEVEN 7
+# define EIGHT 8
+# define NINE 9
 
 # define ZOM_SPEED 40000
 
@@ -136,6 +138,7 @@ typedef struct s_vars
 	int				win_h;
 	int				moves;
 	t_img			xpm[XPM_MAX];
+	t_img			font[FONT_MAX];
 	t_map			*map;
 	unsigned long	frames;
 	int				chest_event;
@@ -161,11 +164,14 @@ void				load_xpm(t_vars *vars);
 void				img_to_img(t_img dst, t_img src, int x, int y);
 void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
+void				load_gfx_font(t_vars *vars);
 void				render_map(t_vars *vars);
 unsigned int		get_pixel_img(t_img img, int x, int y);
 void				extra_line(t_vars *vars);
-void				render_text(t_vars *vars);
+// void				render_text(t_vars *vars);
 void				render_enemies(t_vars *vars);
+t_img				new_file_img(char *path, t_vars *vars);
+void				moves_to_img(t_vars *vars);
 // Movement
 void				turn(t_vars *vars, int img);
 void				move(t_vars *vars, int img, int x, int y);

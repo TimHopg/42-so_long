@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 12:49:41 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:11:27 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 	fd = parse_fd(ac, av);
 	parse_map(fd, &vars);
 	initialise_game(&vars);
-	moves_possible(&vars);
+	// moves_possible(&vars);
 	run_game(&vars);
 	close_window(&vars);
 	return (0);

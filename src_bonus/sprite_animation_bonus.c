@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 12:16:26 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:18:02 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,10 @@ void idle_zombie(t_vars *vars)
  */
 void print_moves(t_vars *vars)
 {
-	char *moves_str;
-
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[XTRA_LINE].img_ptr, 0, vars->map->h * TSZ);
-	mlx_string_put(vars->mlx, vars->win, 10, (vars->map->h + 1) * TSZ - TEXT_H, TEXT_COLOR, "Moves:");
-	moves_str = ft_itoa(vars->moves);
-	if (moves_str == NULL)
-		error_handling_all(ERR_MALLOC, vars);
-	mlx_string_put(vars->mlx, vars->win, 50, (vars->map->h + 1) * TSZ - TEXT_H, TEXT_COLOR, moves_str);
-	free(moves_str);
+	if (vars->moves <= 9999)
+	{
+		extra_line(vars);
+		moves_to_img(vars);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[XTRA_LINE].img_ptr, 0, vars->map->h * TSZ);
+	}
 }

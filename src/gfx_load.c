@@ -6,14 +6,17 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 21:32:39 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:11:46 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 /*
- * Allows transparent pixels to be skipped.
+ * Returns colour (and transparency) information of each pixel in an image.
+ * Line_len is number of bytes per row, y + line_len is the offset to beginning
+ * of the row containing the pixel in question. x + bits per pixel / 8 is the
+ * offset from the start of that row to the pixel itself.
  */
 unsigned int	get_pixel_img(t_img img, int x, int y)
 {

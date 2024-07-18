@@ -6,12 +6,15 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:43:59 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+ * Renders the appropriate tile's image to the background image.
+ */
 void	render_map(t_vars *vars)
 {
 	int	x;

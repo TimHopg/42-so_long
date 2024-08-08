@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/07/16 13:59:55 by thopgood         ###   ########.fr        #
+#    Updated: 2024/08/08 15:32:54 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INCLUDE 	= -Iinclude
 
 MLX_INCLUDE = -I/usr/include -Imlx -O3
 MLX_FLAGS 	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
-GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/21389/minilibx-linux.tgz
+GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/27192/minilibx-linux.tgz
 MLX_TAR 	= minilibx-linux
 
 CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # -fsanitize=address
@@ -35,7 +35,7 @@ LIBFT_DIR 	= libft/
 MLX_DIR		= mlx/
 LIBFT		= -L $(LIBFT_DIR) -lft
 
-UNTAR		= tar -xvf
+UNTAR		= tar -xvzf
 
 SRC 		= 	so_long.c \
 				map_parse.c \

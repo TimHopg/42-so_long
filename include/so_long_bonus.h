@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 21:19:09 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:44:38 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@
 # define EIGHT 8
 # define NINE 9
 
-# define ZOM_SPEED 40000
+# define ZOM_SPEED 400000
 
 typedef struct s_tab
 {

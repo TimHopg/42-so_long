@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:18:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/18 22:47:02 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:26:04 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	has_invalid_char(char *str, char *valids)
 	while (*str)
 	{
 		if (!ft_strchr(valids, *str))
-			return (1); // changed this from {}
+			return (1);
 		str++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/08/08 15:32:54 by thopgood         ###   ########.fr        #
+#    Updated: 2024/08/08 16:25:12 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBFT_DIR 	= libft/
 MLX_DIR		= mlx/
 LIBFT		= -L $(LIBFT_DIR) -lft
 
-UNTAR		= tar -xvzf
+UNTAR		= tar -xzf
 
 SRC 		= 	so_long.c \
 				map_parse.c \
@@ -130,3 +130,6 @@ GREEN	=	'\033[0;32m'
 RED		=	'\033[0;31m'
 NC		=	'\033[0m' # no colour
 #> /dev/null
+
+norm:
+	norminette ./src ./src_bonus ./include

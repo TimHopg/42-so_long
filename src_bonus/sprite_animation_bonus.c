@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 21:20:35 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:57:37 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	chest_animation(t_vars *vars)
 		vars->frames = vars->loop;
 		exit_to_window(vars, BG, SP1);
 	}
-	if (vars->loop == vars->frames + 500 && vars->chest_event)
+	if (vars->loop == vars->frames + 5000 && vars->chest_event)
 		exit_to_window(vars, BG, SP2);
-	if (vars->loop == vars->frames + 1000 && vars->chest_event)
+	if (vars->loop == vars->frames + 10000 && vars->chest_event)
 		exit_to_window(vars, BG, SP3);
-	if (vars->loop == vars->frames + 2000 && vars->chest_event)
+	if (vars->loop == vars->frames + 20000 && vars->chest_event)
 		exit_to_window(vars, BG, SP1);
-	if (vars->loop == vars->frames + 2500 && vars->chest_event)
+	if (vars->loop == vars->frames + 25000 && vars->chest_event)
 	{
 		img_to_img(vars->xpm[BG], vars->xpm[FIELD], vars->map->exit_x * TSZ,
 			vars->map->exit_y * TSZ);

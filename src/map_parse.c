@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/18 22:45:49 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 13:02:45 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*mapfile_to_str(int fd)
 	}
 	if (gnl_status == GNL_ERROR)
 		error_handling_import(ERR_GNL, map_str, NULL);
+	close(fd);
 	return (map_str);
 }
 

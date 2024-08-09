@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/18 22:48:34 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 13:01:47 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,9 @@ void	run_game(t_vars *vars)
 }
 
 /*
- TODO use shell command to edit mlx library file that
-	TODO throws warning during compile
- TODO silence write value warning on compile of mlx (cc/clang)
- * Optimise by only rendering visible tiles.
- TODO revise makefile flags
- */
-
-/*
  * Runs game. Loads variables structure and initialises to zero. Parses map
  * Run's game and then closes elegantly.
+ * Optimise by only rendering visible tiles.
  */
 int	main(int ac, char **av)
 {

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 12:46:13 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:46:11 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define ERR_COIN "Some coins unreachable\n"
 # define ERR_EXITU "Exit unreachable\n"
 # define ERR_ENEMY "Too many/no enemies\n"
+# define ERR_IMG "Problem creating image\n"
 
 // Moves
 # define UP 0

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 21:21:32 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:48:01 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
  */
 t_img	new_img(int w, int h, t_vars *vars)
 {
-	t_img	image;
+	t_img	img;
 
-	image.img_ptr = mlx_new_image(vars->mlx, w, h);
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp),
-			&(image.line_len), &(image.endian));
-	image.w = w;
-	image.h = h;
-	return (image);
+	img.img_ptr = mlx_new_image(vars->mlx, w, h);
+	if (img.img_ptr == NULL)
+		error_handling_all(ERR_IMG, vars);
+	img.addr = mlx_get_data_addr(img.img_ptr, &(img.bpp),
+			&(img.line_len), &(img.endian));
+	img.w = w;
+	img.h = h;
+	return (img);
 }
 
 /*
@@ -32,12 +34,14 @@ t_img	new_img(int w, int h, t_vars *vars)
  */
 t_img	new_file_img(char *path, t_vars *vars)
 {
-	t_img	image;
+	t_img	img;
 
-	image.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &image.w, &image.h);
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp),
-			&(image.line_len), &(image.endian));
-	return (image);
+	img.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &img.w, &img.h);
+	if (img.img_ptr == NULL)
+		error_handling_all(ERR_IMG, vars);
+	img.addr = mlx_get_data_addr(img.img_ptr, &(img.bpp),
+			&(img.line_len), &(img.endian));
+	return (img);
 }
 
 /*
@@ -71,8 +75,6 @@ void	load_gfx(t_vars *vars)
  */
 void	load_gfx_enemy(t_vars *vars)
 {
-	int	x;
-
 	vars->xpm[BAD_I1] = new_file_img("gfx/bad_i1.xpm", vars);
 	vars->xpm[BAD_I2] = new_file_img("gfx/bad_i2.xpm", vars);
 	vars->xpm[BAD_I3] = new_file_img("gfx/bad_i3.xpm", vars);
@@ -80,10 +82,6 @@ void	load_gfx_enemy(t_vars *vars)
 	vars->xpm[BAD_I5] = new_file_img("gfx/bad_i5.xpm", vars);
 	vars->xpm[BAD_L] = new_file_img("gfx/bad_l.xpm", vars);
 	vars->xpm[BAD_R] = new_file_img("gfx/bad_r.xpm", vars);
-	x = -1;
-	while (++x < XPM_MAX)
-		if (!(vars->xpm[x].img_ptr))
-			error_handling_all(ERR_MALLOC, vars);
 }
 
 /*

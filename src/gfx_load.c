@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 12:38:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:47:50 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ unsigned int	get_pixel_img(t_img img, int x, int y)
  */
 t_img	new_img(int w, int h, t_vars *vars)
 {
-	t_img	image;
+	t_img	img;
 
-	image.img_ptr = mlx_new_image(vars->mlx, w, h);
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp),
-			&(image.line_len), &(image.endian));
-	image.w = w;
-	image.h = h;
-	return (image);
+	img.img_ptr = mlx_new_image(vars->mlx, w, h);
+	if (img.img_ptr == NULL)
+		error_handling_all(ERR_IMG, vars);
+	img.addr = mlx_get_data_addr(img.img_ptr, &(img.bpp),
+			&(img.line_len), &(img.endian));
+	img.w = w;
+	img.h = h;
+	return (img);
 }
 
 /*
@@ -47,12 +49,14 @@ t_img	new_img(int w, int h, t_vars *vars)
  */
 t_img	new_file_img(char *path, t_vars *vars)
 {
-	t_img	image;
+	t_img	img;
 
-	image.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &image.w, &image.h);
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp),
-			&(image.line_len), &(image.endian));
-	return (image);
+	img.img_ptr = mlx_xpm_file_to_image(vars->mlx, path, &img.w, &img.h);
+	if (img.img_ptr == NULL)
+		error_handling_all(ERR_IMG, vars);
+	img.addr = mlx_get_data_addr(img.img_ptr, &(img.bpp),
+			&(img.line_len), &(img.endian));
+	return (img);
 }
 
 /*
@@ -61,8 +65,6 @@ t_img	new_file_img(char *path, t_vars *vars)
  */
 void	load_gfx(t_vars *vars)
 {
-	int	x;
-
 	vars->xpm[BG] = new_img(vars->map->w * TSZ, vars->map->h * TSZ, vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
 	vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
@@ -73,10 +75,6 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[PR] = new_file_img("gfx/pr.xpm", vars);
 	vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
 	vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
-	x = -1;
-	while (++x < XPM_MAX)
-		if (!(vars->xpm[x].img_ptr))
-			error_handling_all(ERR_MALLOC, vars);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 12:16:54 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:46:08 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ERR_GNL "Get next line error\n"
 # define ERR_COIN "Some coins unreachable\n"
 # define ERR_EXITU "Exit unreachable\n"
+# define ERR_IMG "Problem creating image\n"
 
 // Image macros
 # define XPM_MAX 10

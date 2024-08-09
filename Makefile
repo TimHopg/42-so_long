@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/08/09 13:06:33 by thopgood         ###   ########.fr        #
+#    Updated: 2024/08/09 14:31:00 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,5 +134,14 @@ NC		=	'\033[0m' # no colour
 norm:
 	norminette ./src ./src_bonus ./include
 
-valall:
-	valgrind --leak-check=full --track-fds=all --track-origins=yes --show-reachable=yes -s -v ./so_long maps/3.ber
+valman%:
+	valgrind --leak-check=full --track-fds=all --track-origins=yes --show-reachable=yes -s ./so_long maps/$*.ber
+
+man%:
+	./so_long maps/$*.ber
+
+valbon%:
+	valgrind --leak-check=full --track-fds=all --track-origins=yes --show-reachable=yes -s ./so_long_bonus maps/bonus/$*.ber
+
+bon%:
+	./so_long_bonus maps/bonus/$*.ber

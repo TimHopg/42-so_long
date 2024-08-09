@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/18 13:11:46 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:38:43 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
  */
 unsigned int	get_pixel_img(t_img img, int x, int y)
 {
-	return (*(unsigned int *)((img.addr + (y * img.line_len) + (x * img.bpp
-				/ 8))));
+	unsigned int	pixel;
+
+	pixel = *((unsigned int *)(img.addr + (y * img.line_len) + (x * img.bpp
+					/ 8)));
+	return (pixel);
 }
 
 /*

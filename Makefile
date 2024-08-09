@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/08/08 16:25:12 by thopgood         ###   ########.fr        #
+#    Updated: 2024/08/09 12:25:55 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX_FLAGS 	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/27192/minilibx-linux.tgz
 MLX_TAR 	= minilibx-linux
 
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 -fsanitize=address
 
 SRC_DIR 	= src/
 SRC_B_DIR	= src_bonus/

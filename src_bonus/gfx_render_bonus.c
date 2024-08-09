@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:29:35 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/16 21:23:48 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:44:17 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	render_map(t_vars *vars)
 }
 
 /*
- * Skips transparent pixels
+ * Puts pixel 'colour' to img at coords (x,y). Skips transparent pixel
  */
 void	put_pixel_img(t_img img, int x, int y, int colour)
 {
@@ -72,7 +72,7 @@ void	put_pixel_img(t_img img, int x, int y, int colour)
 }
 
 /*
- * Copies one image to another by pixels.
+ * Copies one image to another by pixel.
  */
 void	img_to_img(t_img dst, t_img src, int x, int y)
 {
@@ -89,10 +89,13 @@ void	img_to_img(t_img dst, t_img src, int x, int y)
 }
 
 /*
- * Allows transparent pixels to be skipped.
+ * Fetches specific pixel from img at (x,y) coords.
  */
 unsigned int	get_pixel_img(t_img img, int x, int y)
 {
-	return (*(unsigned int *)((img.addr + (y * img.line_len) + (x * img.bpp
-				/ 8))));
+	unsigned int	pixel;
+
+	pixel = *((unsigned int *)(img.addr + (y * img.line_len) + (x * img.bpp
+					/ 8)));
+	return (pixel);
 }

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/07/12 20:06:17 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:16:54 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
-	int				win_w;
-	int				win_h;
 	int				moves;
 	t_img			xpm[XPM_MAX];
 	t_map			*map;
@@ -106,9 +104,7 @@ int					is_map_valid(t_vars *vars);
 void				flood_fill(t_vars *vars);
 void				parse_map(int fd, t_vars *vars);
 // Gfx
-void				load_xpm(t_vars *vars);
 void				img_to_img(t_img dst, t_img src, int x, int y);
-void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
 void				render_map(t_vars *vars);
 unsigned int		get_pixel_img(t_img img, int x, int y);

@@ -6,13 +6,12 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/08/09 14:31:00 by thopgood         ###   ########.fr        #
+#    Updated: 2024/08/09 16:15:09 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # * run `make download` to download dependencies
 # * run `make` to compile binary
-# * run `make remove` to remove dependencies
 
 NAME 		= so_long
 BONUS		= so_long_bonus
@@ -26,7 +25,7 @@ MLX_FLAGS 	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 GET_MLX 	= curl -O https://cdn.intra.42.fr/document/document/27192/minilibx-linux.tgz
 MLX_TAR 	= minilibx-linux
 
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE) -g -O0 # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE) # -g -O0 -fsanitize=address
 
 SRC_DIR 	= src/
 SRC_B_DIR	= src_bonus/
@@ -105,17 +104,16 @@ bonus: $(BONUS)
 
 clean:
 	@cd $(LIBFT_DIR) && $(MAKE) clean
-	@cd $(MLX_DIR) && $(MAKE) clean > /dev/null
 	@echo ""${BLUE}$(NAME)""${NC}Cleaning..."\c"
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(OBJ_B_DIR)
+	@$(RM) $(MLX_TAR).tgz
+	@rm -rf $(MLX_TAR)
 	@echo ""${GREEN}Complete""$(NC)""
 
 fclean: clean
 	@cd $(LIBFT_DIR) && $(MAKE) fclean
 	@$(RM) $(NAME) $(BONUS)
-
-remove:
 	@rm -rf $(MLX_DIR)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:59:27 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 15:29:08 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:50:58 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
  * Function initialises fields of t_map structure
  */
+
 void	initialise_map(t_vars *vars, char *map_str)
 {
 	vars->map = ft_calloc(1, sizeof(t_map));
@@ -29,6 +30,7 @@ void	initialise_map(t_vars *vars, char *map_str)
 /*
  * Saves map dimensions into structure
  */
+
 void	map_dimensions(t_vars *vars)
 {
 	int	i;
@@ -43,6 +45,7 @@ void	map_dimensions(t_vars *vars)
 /*
  * Converts .ber map file into single malloc'd string
  */
+
 char	*mapfile_to_str(int fd)
 {
 	char	*temp;
@@ -74,6 +77,7 @@ char	*mapfile_to_str(int fd)
  * Parses map. Creates map string from map file. Then creates vector from
  * map string. Stores map dimensions in map struct. Checks validity of map.
  */
+
 void	parse_map(int fd, t_vars *vars)
 {
 	char	*map_str;
@@ -102,4 +106,5 @@ void	parse_map(int fd, t_vars *vars)
  * empty map
  * map of new lines
  * map must be of type .ber
+ * too many enemies
  */

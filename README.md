@@ -1,70 +1,111 @@
-# Dining Philosophers
+# so_long
+
+A 2D game developed using the `MiniLibX` library for 42 School Lisboa
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Maps](#maps)
 - [Implementation](#implementation)
+  - [Parsing](#parsing)
+  - [Graphics](#graphics)
+  - [Animation](#animation)
+  - [Random](#random)
+- [Improvements](#improvements)
+- [Tips](#tips)
 - [Resources](#resources)
 
 ## Introduction
 
-An implementation/solution to Dijkstra's dining philosophers problem for 42 School Lisboa. A table of philosophers each have a fork/chopstick between them and a bowl of spaghetti in the middle of the table. For a philosopher to eat, they must take both the fork to their left and the the fork to their right.
+MiniLibX is an add-on library which makes developing in the X-Window (X11) system more approachable. `so_long` is a 2D game developed using this library and is our first graphical project. The objective of the game is to collect all collectibles (fortune cookies) and then reach the treasure chest without being caught by the zombie.
 
-Each philosopher is a thread and each fork is protected by a mutex. Deadlocks, data races and philosopher deaths must be avoided wherever possible. There is no communication between philosophers but there is a monitor/waiter thread that can report if philosophers have died.
+Tested on Ubuntu 22 on Linux.
 
 ## Installation
 
 Git clone the repository:
 
 ```shell
-https://github.com/TimHopg/Dining-Philosophers.git
+https://github.com/TimHopg/42-so_long.git
 ```
 
-Run `make` from within the directory.
-
-`make clean` will remove object files.
-
-`make fclean` will remove program and object files.
+If the `mlx` folder/library is not present, run `make download` from within the directory.  
+Run `make` to compile the game.  
+`make clean` will remove object files.  
+`make fclean` will remove program and object files.  
 
 ## Usage
 
 ```shell
-./philo [number_of_philos] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_required_meals]
+./so_long [map_file]
 ```
 
-`philo` takes 4 mandatory arguments and one optional.
+`so_long` takes 1 mandatory argument. It should be the map file in `.ber` format.
 
-`number_of_philosophers` - Any number between `1` and `200`.
+`WASD` are used for controls. `esc` or the close icon can be used to exit the game.
 
-`time_to_die` - The time in milliseconds for a philosopher to die since the beginning of their last meal. Must be `> 60`.
+### Maps
 
-`time_to_eat` - The time in milliseconds that it takes for each philosopher to finish their meal.
+- `1` - a wall
+- `0` - a background/empty tile
+- `P` - the player (there must be only one)
+- `C` - collectible (fortune cookie)
+- `E` - the exit (there must be only one)
+- `B` - a bad guy (zombie) (there must be a maximum of one)
 
-`time_to_sleep` - The time in milliseconds that each philosopher will sleep for before they can eat again.
-
-`number_of_required_meals` is optional.
+All maps should be rectangular and have wall tiles around the perimeter. All coins and the exit should be reachable.  
+A selection of maps are available in the `/maps` directory.
 
 ## Implementation
 
-Because performance was paramount for this project and input limits were known, the program is implemented entirely on the stack (excluding standard mutex implementation which creates some heap allocation by default).
+Memory management was taken care of throughout development (not at the end of the project) otherwise it can become harder to manage. All structures and data was intialised using `ft_bzero()` or `ft_calloc()`.
 
-This means that margins of error could be kept lower.
+### Parsing
 
-Each philosopher around the table is a thread and one additional thread, the monitor, oversees the operations.
+A recursive flood fill function was used to check the validity of the map.
 
-Each fork is a mutex itself (rather than protecting a variable which represents the fork).
+### Graphics
 
-To help mitigate deadlocks, odd number philosophers always take the fork on their left first and even philosophers always take the fork on their right.
+`xpm` file format was used for all graphics. This is a human readable interpretation of images with each different colour in the image's pallette assigned a different code character.
+Transparency issues were avoided by creating a bespoke image processing function that scanned line by line and ignored any pixels that were set to transparent.
 
-Data races were avoided by ensuring any variables that are accessed by more than one thread are protected by a mutex.
+All graphics used were found at [itch.io](http://itch.io).  
+CREDIT: [pixel-boy](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
+
+Graphics were used for the move counter at the bottom of the screen.
+A Game Over, winning/losing splash is displayed if an end state is reached.
+
+### Animation
+
+The player cannot walk through wall tiles but if they do attempt to the character will turn (the movement counter will not increase). When all collectibles are collected, the chest begins a short animation sequence.
+
+The Zombie animation continues on a loop with a few repetitions of the idle animation before the attack animation in a random direction.
+
+### Random
+
+`rand()` was used to randomise the enemy movement. `srand(time(0))` was the seed used – without it the zombie's movement would be pseudo-random and the same sequence would be used on each launch.
+
+The possible movement directions are calculated and then a random direction is selected.
+
+## Improvements
+
+- Instead of re-rendering the entire playable area of the screen on each change, only the section being updated could be rendered to save resources.
+- Include multiple enemies.
+- Other enemies could move towards the player.
+- Add player idle animation.
+
+## Tips
+
+- Remember to `make re` when changing certain aspects of the game.
+- `keysym` is more abstract than `keycode` (which is hardware specific) and thus more portable. Use it. (`X11/keysym.h`)
+- `destroy_display()` is necessary on Linux architecture (after `destroy_window()`). And `free(mlx.ptr)` too.
+- This was the first time I developed on a virtual machine using `ssh` through `VSCode` so I could maintain my usual environment.
 
 ## Resources
 
-- [Code(quoi)](https://www.codequoi.com/en/)
-- [YouTube: CodeVault Threads Playlist](https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
-- [Medium: Oceano](https://medium.com/@jalal92/the-dining-philosophers-7157cc05315)
-- [YouTube: Jamshidbek Ergashev](https://www.youtube.com/watch?v=UGQsvVKwe90)
-- [Tester: Socrates](https://github.com/nesvoboda/socrates)
-- [Visualiser](https://nafuka11.github.io/philosophers-visualizer/)
+- [Harm Smits 42 Docs](https://harm-smits.github.io/42docs/libs/minilibx/introduction.html)
+- [42 Cursus Gitbook](https://42-cursus.gitbook.io/guide/rank-02/so_long/understand-so_long)
+- [Reactive.so Guide](https://reactive.so/post/42-a-comprehensive-guide-to-so_long)
+- [Transparency](https://pulgamecanica.herokuapp.com/posts/mlx-transparency)

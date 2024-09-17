@@ -6,43 +6,25 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:57:58 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 15:36:50 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:51:33 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 /*
- * Processes events that are used in the game. Keypresses, all coins collected,
- * win scenario.
+ * Checks if enemy and player occupy same position on map and quits game
  */
-int	key_press(int keysym, t_vars *vars)
+void	lose_check(t_vars *vars)
 {
-	if (keysym == XK_Escape)
-		close_window(vars);
-	if (keysym == XK_w)
-		move_up(vars);
-	if (keysym == XK_a)
-		move_left(vars);
-	if (keysym == XK_s)
-		move_down(vars);
-	if (keysym == XK_d)
-		move_right(vars);
-	if (vars->map->coin_count == 0)
+	if (vars->b.x == vars->map->p_x && vars->b.y == vars->map->p_y)
 	{
-		img_to_img(vars->xpm[BG], vars->xpm[CHESTO], (vars->map->exit_x
-				* TSZ) + 8, (vars->map->exit_y * TSZ) + 8);
+		vars->g_over = 1;
+		img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2
+			- 53, (vars->map->h * TSZ) / 2 - 10);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0,
 			0);
-		vars->map->coin_count -= 1;
 	}
-	if (vars->map->coin_count == -1 && vars->map->p_x == vars->map->exit_x
-		&& vars->map->p_y == vars->map->exit_y)
-	{
-		ft_printf("You Win!\n");
-		mlx_loop_end(vars->mlx);
-	}
-	return (0);
 }
 
 /*
@@ -67,35 +49,27 @@ int	parse_fd(int ac, char **av)
 	return (fd);
 }
 
-/* 
- * Initialises mlx, window and loads background image
- */
-void	initialise_game(t_vars *vars)
-{
-	vars->mlx = mlx_init();
-	if (vars->mlx == NULL)
-		error_handling_vars(ERR_MALLOC, vars);
-	vars->win = mlx_new_window(vars->mlx, vars->map->w * TSZ, vars->map->h
-			* TSZ, "Thanks For All The Fish!");
-	if (vars->win == NULL)
-		error_handling_all(ERR_MALLOC, vars);
-	load_background(vars);
-}
-
 /*
- * Initiates the hooks and loops necessary for the game to run.
+ * Function hooks into game loop that runs every frame of the game.
  */
-void	run_game(t_vars *vars)
+int	game_hook(void *param)
 {
-	mlx_hook(vars->win, KeyPress, KeyPressMask, key_press, vars);
-	mlx_hook(vars->win, DestroyNotify, StructureNotifyMask, close_window, vars);
-	mlx_loop(vars->mlx);
+	t_vars	*vars;
+
+	vars = (t_vars *)param;
+	if (vars->g_over == 0)
+	{
+		chest_animation(vars);
+		idle_zombie(vars);
+		lose_check(vars);
+		vars->loop++;
+	}
+	return (0);
 }
 
 /*
  * Runs game. Loads variables structure and initialises to zero. Parses map
  * Run's game and then closes elegantly.
- * Optimise by only rendering visible tiles.
  */
 int	main(int ac, char **av)
 {
@@ -110,3 +84,17 @@ int	main(int ac, char **av)
 	close_window(&vars);
 	return (0);
 }
+
+/*
+ * mlx_loop_hook mallocs and frees on every frame resulting in a large
+	* number of mallocs and frees
+ TODO You Win / You Died / Game Over screen
+ TODO MOVES as graphic and number too. Re-render only number tiles
+ * game state variable that updates when game is over. Can stop animations
+	* and counters once game is over
+ */
+
+// img_to_img(vars->xpm[BG], vars->xpm[WIN], (vars->map->w * TSZ) / 2 - 53,
+	// (vars->map->h * TSZ) / 2 - 10);
+// img_to_img(vars->xpm[BG], vars->xpm[LOSE], (vars->map->w * TSZ) / 2 - 53,
+	// (vars->map->h * TSZ) / 2 - 10);

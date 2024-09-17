@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:58:22 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 14:46:08 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:46:11 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/include/libft.h"
 # include "X11/X.h"
@@ -21,9 +21,13 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 
 # define TSZ 32
-# define VALID_CHARS "01CEP"
+# define FSZ 10
+# define VALID_CHARS "01CEPB"
+# define TEXT_H 11
+# define TEXT_COLOR 0x00022930
 
 // Error strings
 # define ERR_MALLOC "Malloc error\n"
@@ -41,11 +45,20 @@
 # define ERR_GNL "Get next line error\n"
 # define ERR_COIN "Some coins unreachable\n"
 # define ERR_EXITU "Exit unreachable\n"
+# define ERR_ENEMY "Too many/no enemies\n"
 # define ERR_IMG "Problem creating image\n"
 
+// Moves
+# define UP 0
+# define DOWN 1
+# define LEFT 2
+# define RIGHT 3
+# define NO_MOVE 4
+
 // Image macros
-# define XPM_MAX 10
+# define XPM_MAX 25
 # define BG 0
+# define XTRA_LINE 11
 # define FIELD 1
 # define WALL 2
 # define COIN 3
@@ -55,6 +68,41 @@
 # define PR 9
 # define CHESTC 5
 # define CHESTO 6
+# define TATA 10
+# define SP1 12
+# define SP2 13
+# define SP3 14
+# define SP4 15
+# define BAD_I1 16
+# define BAD_I2 17
+# define BAD_I3 18
+# define BAD_I4 19
+# define BAD_I5 20
+# define BAD_L 21
+# define BAD_R 22
+# define LOSE 23
+# define WIN 24
+// Fonts
+# define FONT_MAX 11
+# define MOVES 10
+# define ZERO 0
+# define ONE 1
+# define TWO 2
+# define THREE 3
+# define FOUR 4
+# define FIVE 5
+# define SIX 6
+# define SEVEN 7
+# define EIGHT 8
+# define NINE 9
+
+# define ZOM_SPEED 400000
+
+typedef struct s_tab
+{
+	int				x;
+	int				y;
+}					t_tab;
 
 typedef struct s_img
 {
@@ -78,6 +126,8 @@ typedef struct s_map
 	int				p_count;
 	int				p_x;
 	int				p_y;
+	int				b_x;
+	int				b_y;
 	int				w;
 	int				h;
 }					t_map;
@@ -86,9 +136,18 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
+	int				win_w;
+	int				win_h;
 	int				moves;
+	int				g_over;
+	t_tab			b;
 	t_img			xpm[XPM_MAX];
+	t_img			font[FONT_MAX];
 	t_map			*map;
+	unsigned long	frames;
+	int				chest_event;
+	int				slash;
+	unsigned long	loop;
 }					t_vars;
 
 // Free & error
@@ -105,10 +164,18 @@ int					is_map_valid(t_vars *vars);
 void				flood_fill(t_vars *vars);
 void				parse_map(int fd, t_vars *vars);
 // Gfx
+void				load_xpm(t_vars *vars);
 void				img_to_img(t_img dst, t_img src, int x, int y);
+void				put_pixel_img(t_img img, int x, int y, int color);
 void				load_background(t_vars *vars);
+void				load_gfx_font(t_vars *vars);
 void				render_map(t_vars *vars);
 unsigned int		get_pixel_img(t_img img, int x, int y);
+void				extra_line(t_vars *vars);
+// void				render_text(t_vars *vars);
+void				render_enemies(t_vars *vars);
+t_img				new_file_img(char *path, t_vars *vars);
+void				moves_to_img(t_vars *vars);
 // Movement
 void				turn(t_vars *vars, int img);
 void				move(t_vars *vars, int img, int x, int y);
@@ -116,7 +183,16 @@ void				move_up(t_vars *vars);
 void				move_down(t_vars *vars);
 void				move_right(t_vars *vars);
 void				move_left(t_vars *vars);
+// Animation
+void				print_moves(t_vars *vars);
+void				chest_animation(t_vars *vars);
+void				idle_zombie(t_vars *vars);
+void				moves_possible(t_vars *vars);
 // Main
+void				run_game(t_vars *vars);
+void				initialise_game(t_vars *vars);
+int					key_press(int keysym, t_vars *vars);
+int					game_hook(void *param);
 int					main(int ac, char **av);
 
 /*
@@ -125,6 +201,7 @@ int					main(int ac, char **av);
  * C = collectible
  * E = map exit
  * P = player starting position
+ * B = bad guy starting position
  */
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:23:34 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 15:14:43 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:50:30 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void	free_gfx(t_vars *vars)
 
 	x = -1;
 	while (++x < XPM_MAX)
-	{
 		if (vars->xpm[x].img_ptr)
-		{
-			// ft_printf("free xpm[%d]\n", x);
 			mlx_destroy_image(vars->mlx, vars->xpm[x].img_ptr);
-		}
-	}
+	x = -1;
+	while (++x < FONT_MAX)
+		if (vars->font[x].img_ptr)
+			mlx_destroy_image(vars->mlx, vars->font[x].img_ptr);
 }

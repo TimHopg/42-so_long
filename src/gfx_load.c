@@ -6,26 +6,11 @@
 /*   By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 11:50:37 by thopgood          #+#    #+#             */
-/*   Updated: 2024/08/09 14:47:50 by thopgood         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:50:41 by thopgood         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*
- * Returns colour (and transparency) information of each pixel in an image.
- * Line_len is number of bytes per row, y + line_len is the offset to beginning
- * of the row containing the pixel in question. x + bits per pixel / 8 is the
- * offset from the start of that row to the pixel itself.
- */
-unsigned int	get_pixel_img(t_img img, int x, int y)
-{
-	unsigned int	pixel;
-
-	pixel = *((unsigned int *)(img.addr + (y * img.line_len) + (x * img.bpp
-					/ 8)));
-	return (pixel);
-}
 
 /*
  * Creates image for background.
@@ -61,11 +46,11 @@ t_img	new_file_img(char *path, t_vars *vars)
 
 /*
  * Loads background 'BG' image of window size. Loads each XPM file into struct.
- * Checks for malloc errors and handles appropriately.
  */
 void	load_gfx(t_vars *vars)
 {
-	vars->xpm[BG] = new_img(vars->map->w * TSZ, vars->map->h * TSZ, vars);
+	vars->xpm[BG] = new_img(vars->map->w * TSZ, (vars->map->h) * TSZ, vars);
+	vars->xpm[XTRA_LINE] = new_img(vars->map->w * TSZ, TSZ, vars);
 	vars->xpm[FIELD] = new_file_img("gfx/field.xpm", vars);
 	vars->xpm[WALL] = new_file_img("gfx/wall.xpm", vars);
 	vars->xpm[COIN] = new_file_img("gfx/coin.xpm", vars);
@@ -75,6 +60,28 @@ void	load_gfx(t_vars *vars)
 	vars->xpm[PR] = new_file_img("gfx/pr.xpm", vars);
 	vars->xpm[CHESTC] = new_file_img("gfx/chestc.xpm", vars);
 	vars->xpm[CHESTO] = new_file_img("gfx/chesto.xpm", vars);
+	vars->xpm[TATA] = new_file_img("gfx/tatami.xpm", vars);
+	vars->xpm[SP1] = new_file_img("gfx/spark1.xpm", vars);
+	vars->xpm[SP2] = new_file_img("gfx/spark2.xpm", vars);
+	vars->xpm[SP3] = new_file_img("gfx/spark3.xpm", vars);
+	vars->xpm[SP4] = new_file_img("gfx/spark4.xpm", vars);
+	vars->xpm[LOSE] = new_file_img("gfx/lose.xpm", vars);
+	vars->xpm[WIN] = new_file_img("gfx/win.xpm", vars);
+}
+
+/*
+ * Loads enemy graphics files.
+ * Checks for malloc errors on all images and handles appropriately.
+ */
+void	load_gfx_enemy(t_vars *vars)
+{
+	vars->xpm[BAD_I1] = new_file_img("gfx/bad_i1.xpm", vars);
+	vars->xpm[BAD_I2] = new_file_img("gfx/bad_i2.xpm", vars);
+	vars->xpm[BAD_I3] = new_file_img("gfx/bad_i3.xpm", vars);
+	vars->xpm[BAD_I4] = new_file_img("gfx/bad_i4.xpm", vars);
+	vars->xpm[BAD_I5] = new_file_img("gfx/bad_i5.xpm", vars);
+	vars->xpm[BAD_L] = new_file_img("gfx/bad_l.xpm", vars);
+	vars->xpm[BAD_R] = new_file_img("gfx/bad_r.xpm", vars);
 }
 
 /*
@@ -83,6 +90,11 @@ void	load_gfx(t_vars *vars)
 void	load_background(t_vars *vars)
 {
 	load_gfx(vars);
+	load_gfx_font(vars);
+	load_gfx_enemy(vars);
 	render_map(vars);
+	render_enemies(vars);
+	extra_line(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm[BG].img_ptr, 0, 0);
+	print_moves(vars);
 }

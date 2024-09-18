@@ -6,7 +6,7 @@
 #    By: thopgood <thopgood@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 11:25:34 by thopgood          #+#    #+#              #
-#    Updated: 2024/09/17 15:57:11 by thopgood         ###   ########.fr        #
+#    Updated: 2024/09/18 13:07:22 by thopgood         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,6 @@ clean:
 fclean: clean
 	@cd $(LIBFT_DIR) && $(MAKE) fclean
 	@$(RM) $(NAME)
-	@rm -rf $(MLX_DIR)
 
 re: fclean all
 

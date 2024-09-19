@@ -2,6 +2,8 @@
 
 A 2D game developed using the `MiniLibX` library for 42 School Lisboa.
 
+![so_long grade](./so_long_grade.png)
+
 ![so_long_demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdsYW1lNDlqZzJqZTNvemU0Nmlqdndmamw5Njd5anlkdzJmNDd6bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Od0XMgLsmJhGL4kAa9/giphy.gif)
 
 ## Table of Contents
